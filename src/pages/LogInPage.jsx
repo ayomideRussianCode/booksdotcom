@@ -29,7 +29,7 @@ const LoginPage = () => {
               <img src={facebookLogo} alt="Facebook" className="w-16 h-6" />
             </button>
             <button className="p-2 px-4 pt-2 rounded-full ">
-              <img src={appleLogo} alt="Apple" className="w-16 h-6" />
+              <img src={appleLogo}  alt="Apple" className="w-16 h-6" />
             </button>
           </div>
 
