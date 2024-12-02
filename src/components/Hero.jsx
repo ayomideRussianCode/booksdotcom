@@ -1,4 +1,3 @@
-import heroImage from "../assets/abstract-portrait.svg";
 
 function Hero() {
   return (
@@ -20,9 +19,6 @@ function Hero() {
               Shop Collections
             </a>
           </div>
-        </div>
-        <div>
-          <img src={heroImage} alt="HeroImage" />
         </div>
         {/* achievements */}
       </div>

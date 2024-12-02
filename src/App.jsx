@@ -6,13 +6,16 @@ import {
 } from "react-router-dom";
 import MainLayout  from "./layouts/MainLayout";
 import LandingPage   from "./pages/LandingPage";
-import ShopCollectionsPage from "./pages/ShopCollectionsPage";
+import LoginPage from "./pages/LogInPage";
+import SignUpPage from "./pages/SignUpPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<MainLayout />}>
-      <Route index element={<LandingPage />} />
-      <Route path="/" element={<ShopCollectionsPage/>}/>
+      <Route index element={<LandingPage/>}/>
+      <Route path="/login" element={<LoginPage />}/>
+      <Route path="/signup" element={<SignUpPage />}/>
+
     </Route>
   )
 );

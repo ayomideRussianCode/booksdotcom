@@ -5,14 +5,14 @@ import Services from "../components/Services";
 import Reviews from "../components/Reviews";
 import LatestPosts from "../components/LatestPosts";
 
-export const LandingPage = () => {
+const LandingPage = () => {
   return (
     <>
       <Hero />
-      <BestSelling/>
-      <Services/>
-      <Reviews/>
-      <LatestPosts/>
+      <BestSelling />
+      <Services />
+      <Reviews />
+      <LatestPosts />
     </>
   );
 };

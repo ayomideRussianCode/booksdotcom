@@ -10,37 +10,37 @@ function NavBar() {
         </div>
         <div className="hidden space-x-10 md:flex">
           <NavLink
-            to="/"
+            to="/home"
             className="font-medium text-customBlue   hover:underline decoration-customBlue decoration-2"
           >
             Home
           </NavLink>
           <NavLink
-            to="/"
+            to="/blogs"
             className="font-medium text-customBlack   hover:underline decoration-customBlue decoration-2"
           >
             Blogs
           </NavLink>
           <NavLink
-            to="/"
+            to="/about"
             className="font-medium text-customBlack   hover:underline decoration-customBlue decoration-2"
           >
             About Us
           </NavLink>
-          <aNavLink
-            to="/"
+          <NavLink
+            to="/contact"
             className="font-medium text-customBlack   hover:underline decoration-customBlue decoration-2"
           >
             Contact Us
-          </aNavLink>
+          </NavLink>
           <NavLink
-            to="/"
+            to="/signup"
             className=" hidden p-2 px-5 pt-2  text-customBlue rounded-full border-customBlue hover: decoration-customBlue border-2 md:block"
           >
             Sign Up
           </NavLink>
           <NavLink
-            to="/"
+            to="/login"
             className=" hidden p-2 px-6 pt-2  text-customWhite bg-customBlue rounded-full md:block"
           >
             Log In
