@@ -8,15 +8,15 @@ const SignUpPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-customWhite font-font1">
       <div className="flex w-full max-w-4xl  ">
-        <div className="hidden md:flex w-1/2 items-center justify-center ">
+        <div className="hidden w-1/2 items-center justify-center md:flex ">
           <img
             src={signUpImg}
             alt="Bookshelf Illustration"
-            className="w-full h-auto"
+            className="max-w-xl h-full object-cover"
           />
         </div>
 
-        <div className="w-full md:w-1/2 p-8">
+        <div className="w-full md:w-1/2 p-14">
           <h2 className="text-2xl font-bold text-center text-customBlack">
             Sign Up to Your BOOKS.COM
           </h2>
