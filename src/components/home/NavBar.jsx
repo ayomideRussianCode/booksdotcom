@@ -1,4 +1,4 @@
-import logo from "../assets/logo.svg";
+import logo from "../../assets/logo.svg";
 import { NavLink } from "react-router-dom";
 
 function NavBar() {
@@ -11,13 +11,13 @@ function NavBar() {
         <div className="hidden space-x-10 md:flex">
           <NavLink
             to="/home"
-            className=" font-medium text-customBlue   hover:underline decoration-customBlue decoration-2"
+            className="font-medium text-customBlue   hover:underline decoration-customBlue decoration-2"
           >
             Home
           </NavLink>
           <NavLink
             to="/blogs"
-            className=" font-medium text-customBlack   hover:underline decoration-customBlue decoration-2"
+            className="font-medium text-customBlack   hover:underline decoration-customBlue decoration-2"
           >
             Blogs
           </NavLink>
@@ -35,7 +35,7 @@ function NavBar() {
           </NavLink>
           <NavLink
             to="/signup"
-            className=" hidden p-2 px-4 pt-2  text-customBlue rounded-full border-customBlue hover: decoration-customBlue border-2 md:block"
+            className=" hidden p-2 px-5 pt-2  text-customBlue rounded-full border-customBlue hover: decoration-customBlue border-2 md:block"
           >
             Sign Up
           </NavLink>
