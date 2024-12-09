@@ -1,4 +1,3 @@
-import heroImage from "../../assets/18 1 (1).png";
 
 function Hero() {
   return (
@@ -22,7 +21,7 @@ function Hero() {
           </div>
         </div>
         <div>
-          <img src={heroImage} alt="HeroImage" />
+          <img src="/Heroimage2.png" alt="HeroImage" />
         </div>
         {/* achievements */}
       </div>

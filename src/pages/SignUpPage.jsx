@@ -1,15 +1,13 @@
-import React from "react";
-import signUpImg from "../assets/Frame 53.png";
-import logo from "../assets/logo.svg";
+
 
 const SignUpPage = () => {
   return (
     <div className="bg-customWhite min-h-screen font-font1 flex flex-col  md:flex-row">
       <div className="w-ful bg-customWhite shadow-lg md:w-1/2">
-      <img src={signUpImg} alt="Sign Up" className="w-full h-full  object-cover   hidden lg:flex"/>
+      <img src="../../public/Signupimg.png" alt="Sign Up" className="w-full h-full  object-cover   hidden lg:flex"/>
       </div>
       <div className="  bg-customWhite  flex items-center justify-center">
-        <img src={logo} alt="BOOKS.COM" />
+        <img src="../../public/Logo.png"alt="BOOKS.COM" />
         <h2 className="text-4xl text-customBlack font-semibold mb-4">Sign up your BOOKS.COM</h2>
       </div>
       

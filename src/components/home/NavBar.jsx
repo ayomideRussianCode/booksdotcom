@@ -1,4 +1,3 @@
-import logo from "../../assets/logo.svg";
 import { NavLink } from "react-router-dom";
 
 function NavBar() {
@@ -6,7 +5,7 @@ function NavBar() {
     <nav className="relative container mx-auto p-6 font-font1">
       <div className="flex items-center justify-between">
         <div className="pt-2">
-          <img src={logo} alt="BOOKSDOTCOM" />
+          <img src="/Logo.png" alt="BOOKSDOTCOM" />
         </div>
         <div className="hidden space-x-10 md:flex">
           <NavLink

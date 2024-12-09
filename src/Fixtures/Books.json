@@ -1,28 +1,28 @@
 [
     {
        "id": 1,
-       "image": "/assets/Bestselling1.png",
+       "image": "/Bestselling1.png",
        "title": "The Secrets",
        "author": "Jonas Nill Barton",
        "price": "$8"
     },
     {
         "id": 2,
-        "image": "/assets/Bestselling2.png",
+        "image": "/Bestselling2.png",
         "title": "World Museums",
         "author": "Jonathan Masst",
         "price": "$23"
       },
       {
         "id": 3,
-        "image": "/assets/Bestselling3.png",
+        "image": "/Bestselling3.png",
         "title": "Goal Planner",
         "author": "Ikigloo",
         "price": "$10"
       },
       {
         "id": 4,
-        "image": "/assets/Bestselling4.png",
+        "image": "/Bestselling4.png",
         "title": "Love Myself",
         "author": "Jonathan Masst",
         "price": "$15"
