@@ -18,7 +18,8 @@ module.exports = {
         customWhite: "#fff",
         customBlue: "#007AFF",
         customBlack: "#000000",
-        customAsh:  "#828282"
+        customAsh:  "#828282",
+        customColor1: "#EBEBEB"
       },
     },
   },

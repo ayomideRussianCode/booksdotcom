@@ -1,8 +1,4 @@
-import React from "react";
-import loginImg from "../assets/Frame 23.png";
-import googleLogo from "../assets/Frame 24.png";
-import facebookLogo from "../assets/Frame 25.png";
-import appleLogo from "../assets/Frame 26.png";
+
 
 const LoginPage = () => {
   return (
@@ -10,7 +6,7 @@ const LoginPage = () => {
         
       <div className="flex w-full max-w-4xl  bg-customWhite">
         <div className="hidden rounded-lg w-1/2 items-center justify-center  md:flex">
-          <img src={loginImg} alt="Illustration" className="w-full h-auto" />
+          <img src="../../public/Logo.png" alt="Illustration" className="w-full h-auto" />
         </div>
 
         <div className="w-full md:w-1/2 p-8">
@@ -23,13 +19,13 @@ const LoginPage = () => {
 
           <div className="flex space-x-4 justify-center mb-6">
             <button className="p-2 px-4 pt-2 rounded-full ">
-              <img src={googleLogo} alt="Google" className="w-16 h-6" />
+              <img src="../../public/google.png" alt="Google" className="w-16 h-6" />
             </button>
             <button className="p-2 px-4 pt-2 rounded-full ">
-              <img src={facebookLogo} alt="Facebook" className="w-16 h-6" />
+              <img src="../../public/facebook.png"  alt="Facebook" className="w-16 h-6" />
             </button>
             <button className="p-2 px-4 pt-2 rounded-full ">
-              <img src={appleLogo} alt="Apple" className="w-16 h-6" />
+              <img src="../../public/Basil_apple.png"  alt="Apple" className="w-16 h-6" />
             </button>
           </div>
 
