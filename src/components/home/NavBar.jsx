@@ -7,16 +7,16 @@ function NavBar() {
         <div className="pt-2">
           <img src="/Logo.png" alt="BOOKSDOTCOM" />
         </div>
-        <div className=" space-x-10 md:flex">
+        <div className=" hidden space-x-10 md:flex">
           <NavLink
             to="/home"
-            className="font-medium text-customBlue hover:underline decoration-customBlue decoration-2 md:hidden"
+            className="font-medium text-customBlue hover:underline decoration-customBlue decoration-2 "
           >
             Home
           </NavLink>
           <NavLink
             to="/blogs"
-            className="font-medium text-customBlack hover:underline decoration-customBlue decoration-2 md:hidden"
+            className="font-medium text-customBlack hover:underline decoration-customBlue decoration-2 "
           >
             Blogs
           </NavLink>
@@ -28,7 +28,7 @@ function NavBar() {
           </NavLink>
           <NavLink
             to="/contact"
-            className="font-medium text-customBlack   hover:underline decoration-customBlue decoration-2 md:hidden"
+            className="font-medium text-customBlack   hover:underline decoration-customBlue decoration-2 "
           >
             Contact Us
           </NavLink>
