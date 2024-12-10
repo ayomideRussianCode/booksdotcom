@@ -7,40 +7,40 @@ function NavBar() {
         <div className="pt-2">
           <img src="/Logo.png" alt="BOOKSDOTCOM" />
         </div>
-        <div className="hidden space-x-10 md:flex">
+        <div className=" space-x-10 md:flex">
           <NavLink
             to="/home"
-            className="font-medium text-customBlue   hover:underline decoration-customBlue decoration-2"
+            className="font-medium text-customBlue hover:underline decoration-customBlue decoration-2 md:hidden"
           >
             Home
           </NavLink>
           <NavLink
             to="/blogs"
-            className="font-medium text-customBlack   hover:underline decoration-customBlue decoration-2"
+            className="font-medium text-customBlack hover:underline decoration-customBlue decoration-2 md:hidden"
           >
             Blogs
           </NavLink>
           <NavLink
             to="/about"
-            className="font-medium text-customBlack   hover:underline decoration-customBlue decoration-2"
+            className="font-medium text-customBlack hover:underline decoration-customBlue decoration-2 " 
           >
             About Us
           </NavLink>
           <NavLink
             to="/contact"
-            className="font-medium text-customBlack   hover:underline decoration-customBlue decoration-2"
+            className="font-medium text-customBlack   hover:underline decoration-customBlue decoration-2 md:hidden"
           >
             Contact Us
           </NavLink>
           <NavLink
             to="/signup"
-            className=" hidden p-2 px-5 pt-2  text-customBlue rounded-full border-customBlue hover: decoration-customBlue border-2 md:block"
+            className=" hidden font-medium py-2 px-6 border-2 text-customBlue rounded-full border-customBlue hover: decoration-customBlue  md:block"
           >
             Sign Up
           </NavLink>
           <NavLink
             to="/login"
-            className=" hidden p-2 px-6 pt-2  text-customWhite bg-customBlue rounded-full md:block"
+            className=" hidden font-medium py-2 px-6 border-2  text-customWhite bg-customBlue rounded-full md:block"
           >
             Log In
           </NavLink>

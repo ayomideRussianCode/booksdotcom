@@ -4,7 +4,7 @@ function BestSelling() {
   return (
     <section id="best-selling">
       <div className="max-w-6xl font-font1 flex flex-col px-5 mx-auto mt-32 text-center">
-        <h2 className="text-4xl font-extralight text-center uppercase font-font2 pb-6">
+        <h2 className="text-4xl font-extralight text-start uppercase font-font2 pb-6">
           Best selling books
         </h2>
       </div>

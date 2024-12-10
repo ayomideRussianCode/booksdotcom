@@ -34,13 +34,13 @@ function NavBar() {
           </NavLink>
           <NavLink
             to="/signup"
-            className=" hidden p-2 px-4 pt-2  text-customBlue rounded-full border-customBlue hover: decoration-customBlue border-2 md:block"
+            className=" hidden py-2 px-6 border-2  text-customBlue rounded-full border-customBlue hover: decoration-customBlue  md:block"
           >
             Sign Up
           </NavLink>
           <NavLink
             to="/login"
-            className=" hidden p-2 px-6 pt-2  text-customWhite bg-customBlue rounded-full md:block"
+            className=" hidden py-2 px-6 border-2 text-customWhite bg-customBlue rounded-full md:block"
           >
             Log In
           </NavLink>

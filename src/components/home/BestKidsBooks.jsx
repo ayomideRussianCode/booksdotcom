@@ -1,15 +1,15 @@
-import books from "../../Fixtures/Books.json";
+import kidBooks from "../../Fixtures/BestKidsBooks.json";
 
-function BestSelling() {
+function BestKidsBooks() {
   return (
     <section id="best-selling">
       <div className="max-w-6xl font-font1 flex flex-col px-5 mx-auto mt-32 text-center">
         <h2 className="text-4xl font-extralight text-center uppercase font-font2 pb-6">
-          Best selling books
+          Best Children's Books
         </h2>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 font-font1">
-        {books.map((book) => (
+        {kidBooks.map((book) => (
           <div
             key={book.id}
             className="border border-customAsh rounded-lg shadow-md overflow-hidden"
@@ -31,4 +31,4 @@ function BestSelling() {
   );
 }
 
-export default BestSelling;
+export default BestKidsBooks;

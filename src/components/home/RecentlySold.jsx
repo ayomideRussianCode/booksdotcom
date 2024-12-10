@@ -1,6 +1,6 @@
 import books from "../../Fixtures/Books.json";
 
-function BestSelling() {
+function RecentlySold() {
   return (
     <section id="best-selling">
       <div className="max-w-6xl font-font1 flex flex-col px-5 mx-auto mt-32 text-center">
@@ -31,4 +31,4 @@ function BestSelling() {
   );
 }
 
-export default BestSelling;
+export default RecentlySold;
