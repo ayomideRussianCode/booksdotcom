@@ -10,7 +10,6 @@ const SignUpPage = () => {
         <img src="../../public/Logo.png"alt="BOOKS.COM" />
         <h2 className="text-4xl text-customBlack font-semibold mb-4">Sign up your BOOKS.COM</h2>
       </div>
-      
     </div>
   );
 };

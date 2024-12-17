@@ -19,7 +19,8 @@ module.exports = {
         customBlue: "#007AFF",
         customBlack: "#000000",
         customAsh:  "#828282",
-        customColor1: "#EBEBEB"
+        customColor1: "#EBEBEB",
+        customColor2: "#5CE1E6"
       },
     },
   },
