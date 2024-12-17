@@ -1,12 +1,13 @@
-
-
 const LoginPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-customWhite font-font1">
-        
       <div className="flex w-full max-w-4xl  bg-customWhite">
         <div className="hidden rounded-lg w-1/2 items-center justify-center  md:flex">
-          <img src="../../public/Logo.png" alt="Illustration" className="w-full h-auto" />
+          <img
+            src="/Loginimg.png.png"
+            alt="Illustration"
+            className="w-full h-auto"
+          />
         </div>
 
         <div className="w-full md:w-1/2 p-8">
@@ -19,13 +20,13 @@ const LoginPage = () => {
 
           <div className="flex space-x-4 justify-center mb-6">
             <button className="p-2 px-4 pt-2 rounded-full ">
-              <img src="../../public/google.png" alt="Google" className="w-16 h-6" />
+              <img src="/google.png" alt="Google" className="w-16 h-6" />
             </button>
             <button className="p-2 px-4 pt-2 rounded-full ">
-              <img src="../../public/facebook.png"  alt="Facebook" className="w-16 h-6" />
+              <img src="/facebook.png" alt="Facebook" className="w-16 h-6" />
             </button>
             <button className="p-2 px-4 pt-2 rounded-full ">
-              <img src="../../public/Basil_apple.png"  alt="Apple" className="w-16 h-6" />
+              <img src="/Basil_apple.png" alt="Apple" className="w-16 h-6" />
             </button>
           </div>
 
@@ -40,9 +41,7 @@ const LoginPage = () => {
               <label
                 htmlFor="email"
                 className="block text-gray-700 text-sm font-medium"
-              >
-                
-              </label>
+              ></label>
               <input
                 type="email"
                 id="email"
@@ -55,9 +54,7 @@ const LoginPage = () => {
               <label
                 htmlFor="password"
                 className="block text-gray-700 text-sm font-medium"
-              >
-                
-              </label>
+              ></label>
               <input
                 type="password"
                 id="password"
@@ -83,7 +80,7 @@ const LoginPage = () => {
 
           <p className="text-sm text-center text-customBlack mt-6">
             New user?{" "}
-            <a href="a" className="text-blue-500 hover:underline">
+            <a href="/signup" className="text-blue-500 hover:underline">
               Create an account
             </a>
           </p>

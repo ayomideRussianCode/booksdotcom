@@ -3,23 +3,25 @@ import popularBooks from "../../Fixtures/PopularBooks.json";
 function PopularBooks() {
   return (
     <section id="popular-books">
-      <div className="max-w-6xl font-font1 flex flex-col px-5 mx-auto mt-32 text-center">
-        <h2 className="text-xl font-extralight uppercase font-font2 pb-6">
-          Popular Books
+      <div className="max-w-6xl font-font1 flex flex-col mx-auto ">
+        <h2 className="text-2xl text-left font-extralight  font-font2 py-4">
+          Popular this month
         </h2>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 font-font1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 m-6 font-font1">
         {popularBooks.map((popularBook) => (
           <div
             key={popularBook.id}
-            className=" mx-auto border border-customAsh rounded-lg shadow-md overflow-hidden"
+            className="border border-customAsh rounded-lg shadow-md overflow-hidden"
           >
-            <img
-              src={popularBook.image}
-              alt={popularBook.title}
-              className=" w-56 h-64 p-4 object-contain mx-auto"
-            />
-            <div className="p-4 text-center">
+            <div>
+              <img
+                src={popularBook.image}
+                alt={popularBook.title}
+                className=" w-full h-full p-6 object-cover"
+              />
+            </div>
+            <div className="pl-6 ">
               <h2 className="text-lg font-medium text-customBlack">
                 {popularBook.title}
               </h2>

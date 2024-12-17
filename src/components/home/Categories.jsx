@@ -5,7 +5,7 @@ const Categories = () => {
   return (
     <section
       id="bestselling"
-      className="relative container mx-auto flex flex-col"
+      className="relative container pb-8 mx-auto flex flex-col"
     >
       <div className="flex flex-col font-font2 text-customBlack text-center ">
         <h1 className=" text-5xl font-light font-font2 mb-6">Categories</h1>
