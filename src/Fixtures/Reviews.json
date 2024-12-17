@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "user": "Joshua Praise",
+        "comment": "I stumbled upon this bookstore while visiting  the city and it instantly became my favorite site!"
+    },
+    {
+        "id": 2,
+        "user": "John Smith",
+        "comment": "I stumbled upon this bookstore while visiting  the city and it instantly became my favorite site!"
+    },
+    {
+        "id": 3,
+        "user": "Jane Smith",
+         "comment": "I stumbled upon this bookstore while visiting  the city and it instantly became my favorite site!"
+    }
+]

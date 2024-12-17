@@ -1,11 +1,11 @@
 import popularBooks from "../../Fixtures/PopularBooks.json";
 
-function PopularBooks() {
+function NewArrivals() {
   return (
     <section id="popular-books">
       <div className="max-w-6xl font-font1 flex flex-col mx-auto ">
         <h2 className="text-2xl text-left font-extralight  font-font2 py-4">
-          Popular this month
+          New Arrivals
         </h2>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 m-6 font-font1">
@@ -37,4 +37,4 @@ function PopularBooks() {
   );
 }
 
-export default PopularBooks;
+export default NewArrivals;
