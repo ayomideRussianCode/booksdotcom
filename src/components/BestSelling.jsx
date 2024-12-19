@@ -8,20 +8,18 @@ function BestSelling() {
           Best selling books
         </h2>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 m-6 font-font1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 m-6 font-font1">
         {books.map((book) => (
           <div
             key={book.id}
             className="border border-customAsh rounded-lg shadow-md overflow-hidden"
           >
-              
             <div className="">
               <img
                 src={book.image}
                 alt={book.title}
                 className="w-full h-full p-6 object-cover "
               />
-            
             </div>
             <div className=" pl-6">
               <h2 className="text-lg font-medium text-customBlack">
@@ -41,6 +39,4 @@ function BestSelling() {
 
 export default BestSelling;
 
-
 // {book.discount && (<span className="left-0 bg-red-500 text-white text-xs font-bold px-6 py-2 rounded-br-lg">{book.discount} off</span>)}
-            
