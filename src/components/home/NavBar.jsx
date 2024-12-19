@@ -10,14 +10,11 @@ function NavBar() {
 
   return (
     <nav className="relative container mx-auto p-6 font-font1">
-      {/* Main Navigation */}
       <div className="flex items-center justify-between">
-        {/* Logo */}
         <div className="pt-2">
           <img src="/Logo.png" alt="BOOKSDOTCOM" />
         </div>
 
-        {/* Desktop Menu */}
         <div className="hidden space-x-10 md:flex">
           <NavLink
             to="/home"
@@ -57,7 +54,6 @@ function NavBar() {
           </NavLink>
         </div>
 
-        {/* Hamburger Icon */}
         <button
           id="menu-btn"
           className={`block hamburger md:hidden focus:outline-none ${

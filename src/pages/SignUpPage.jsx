@@ -29,7 +29,7 @@ function SignUpPage() {
               <img src="/facebook.png" alt="Facebook" className="w-4 h-4" />
             </button>
             <button className="px-8 rounded-lg border-2 border-customAsh ">
-              <img src="/Basil_apple.png" alt="Apple" className="w-4 h-4" />
+              <img src="/basil_apple.png" alt="Apple" className="w-4 h-4" />
             </button>
           </div>
 
