@@ -105,8 +105,10 @@ function SignUpPage() {
               </label>
             </div>
 
-            <button className="w-full bg-customBlue text-white py-2 rounded-full hover:bg-customBlue">
-              Sign In
+            <button className="w-full bg-customBlue py-2 mt-10 rounded-full">
+              <a className="text-customWhite" href="/home">
+                Sign Up
+              </a>
             </button>
           </form>
 
