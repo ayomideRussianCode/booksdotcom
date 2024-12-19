@@ -1,32 +1,35 @@
-const SignUpPage = () => {
+function SignUpPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-customWhite font-font1">
       <div className="flex w-full max-w-4xl  bg-customWhite">
-        <div className="hidden rounded-lg w-1/2 items-center justify-center  md:flex">
+        <div className="hidden rounded-lg w-1/2 items-center justify-center md:flex">
           <img
-            src="./SigninImg.png"
+            src="/SigninImg.png"
             alt="Illustration"
             className="w-full h-auto"
           />
         </div>
 
         <div className="w-full md:w-1/2 p-8">
-          <h2 className="text-2xl font-bold text-center text-customBlack">
-            Login to Your Account
+          <div>
+            <img className="hidden md:flex" src="/Logo.png" alt="Logo" />
+          </div>
+          <h2 className="text-2xl pb-2 font-bold text-center text-customBlack">
+            Sign Up to BOOKS.COM
           </h2>
-          <p className="text-sm text-center text-customAsh mb-6">
-            Welcome back! Select a method to log in.
+          <p className="text-xs text-center text-customAsh mb-6">
+            Create your account with just few steps
           </p>
 
           <div className="flex space-x-4 justify-center mb-6">
-            <button className="p-2 px-4 pt-2 rounded-full ">
-              <img src="/google.png" alt="Google" className="w-16 h-6" />
+            <button className="px-8 py-2 rounded-lg border-2 border-customAsh ">
+              <img src="/google.png" alt="Google" className="w-4 h-4" />
             </button>
-            <button className="p-2 px-4 pt-2 rounded-full ">
-              <img src="/facebook.png" alt="Facebook" className="w-16 h-6" />
+            <button className="px-8 rounded-lg border-2 border-customAsh ">
+              <img src="/facebook.png" alt="Facebook" className="w-4 h-4" />
             </button>
-            <button className="p-2 px-4 pt-2 rounded-full ">
-              <img src="/Basil_apple.png" alt="Apple" className="w-16 h-6" />
+            <button className="px-8 rounded-lg border-2 border-customAsh ">
+              <img src="/Basil_apple.png" alt="Apple" className="w-4 h-4" />
             </button>
           </div>
 
@@ -39,55 +42,84 @@ const SignUpPage = () => {
           <form>
             <div className="mb-4">
               <label
+                htmlFor="name"
+                className="block text-customAsh text-sm font-medium"
+              ></label>
+              <input
+                type="name"
+                id="name"
+                placeholder="Name"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-customBlue"
+              />
+            </div>
+            <div className="mb-4">
+              <label
                 htmlFor="email"
-                className="block text-gray-700 text-sm font-medium"
+                className="block text-customAsh text-sm font-medium"
               ></label>
               <input
                 type="email"
                 id="email"
                 placeholder="Email"
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-customBlue"
               />
             </div>
 
             <div className="mb-4">
               <label
                 htmlFor="password"
-                className="block text-gray-700 text-sm font-medium"
+                className="block text-customAsh text-sm font-medium"
               ></label>
               <input
                 type="password"
                 id="password"
                 placeholder="Password"
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-customBlue"
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="password"
+                className="block text-customAsh text-sm font-medium"
+              ></label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Confirm Password"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-customBlue"
               />
             </div>
 
             <div className="flex items-center justify-between mb-6">
               <label className="flex items-center">
                 <input type="checkbox" className="mr-2" />
-                <span className="text-sm text-customBlack">Remember me</span>
+                <span className="text-sm text-customBlack">
+                  I agree with the{" "}
+                  <a
+                    className="text-sm text-customBlue hover:underline"
+                    href="privacypolicy"
+                  >
+                    Privacy Policy
+                  </a>{" "}
+                </span>
               </label>
-              <a href="a" className="text-sm text-customBlack hover:underline">
-                Forgot Password?
-              </a>
             </div>
 
-            <button className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">
-              Log In
+            <button className="w-full bg-customBlue text-white py-2 rounded-full hover:bg-customBlue">
+              Sign In
             </button>
           </form>
 
           <p className="text-sm text-center text-customBlack mt-6">
-            New user?{" "}
-            <a href="login" className="text-blue-500 hover:underline">
-              Create an account
+            Already have an account?{" "}
+            <a href="/login" className="text-customBlue hover:underline">
+              Log in
             </a>
           </p>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default SignUpPage;
