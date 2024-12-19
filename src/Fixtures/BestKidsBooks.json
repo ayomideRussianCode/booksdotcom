@@ -1,31 +1,30 @@
 [
-    {
-       "id": 1,
-       "image": "/BestKidsBook1.png",
-       "title": "Out of My Mind",
-       "author": "Sharon M. Draper",
-       "price": "$17"
-    },
-    {
-        "id": 2,
-        "image": "/BestKidsBook2.png",
-        "title": "Hidden Figures",
-        "author": "Margot Lee Shetterly",
-        "price": "$22"
-      },
-      {
-        "id": 3,
-        "image": "/BestKidsBook3.png",
-        "title": "The Unteachable",
-        "author": "Gordon Korman",
-        "price": "$32"
-      },
-      {
-        "id": 4,
-        "image": "/BestKidsBook4.png",
-        "title": "Winter Magic",
-        "author": "Amy Alward",
-        "price": "$14"
-      }
-    
+  {
+    "id": 1,
+    "image": "/Bestkidsbook1.png",
+    "title": "Out of My Mind",
+    "author": "Sharon M. Draper",
+    "price": "$17"
+  },
+  {
+    "id": 2,
+    "image": "/Bestkidsbook2.png",
+    "title": "Hidden Figures",
+    "author": "Margot Lee Shetterly",
+    "price": "$22"
+  },
+  {
+    "id": 3,
+    "image": "/Bestkidsbook3.png",
+    "title": "The Unteachable",
+    "author": "Gordon Korman",
+    "price": "$32"
+  },
+  {
+    "id": 4,
+    "image": "/Bestkidsbook4.png",
+    "title": "Winter Magic",
+    "author": "Amy Alward",
+    "price": "$14"
+  }
 ]

@@ -1,31 +1,30 @@
 [
-    {
-       "id": 1,
-       "image": "/PopularBook1.png",
-       "title": "Authentic",
-       "author": "Paul Van Doren",
-       "price": "$30"
-    },
-    {
-        "id": 2,
-        "image": "/PopularBook2.png",
-        "title": "World Museums",
-        "author": "Jonathan Masst",
-        "price": "$23"
-      },
-      {
-        "id": 3,
-        "image": "/PopularBook3.png",
-        "title": "The Song of Achilles",
-        "author": "Madeline Miller",
-        "price": "$17"
-      },
-      {
-        "id": 4,
-        "image": "/PopularBook4.png",
-        "title": "The Answer Is",
-        "author": "Alex Trebek",
-        "price": "$9"
-      }
-    
+  {
+    "id": 1,
+    "image": "/Popularbook1.png",
+    "title": "Authentic",
+    "author": "Paul Van Doren",
+    "price": "$30"
+  },
+  {
+    "id": 2,
+    "image": "/Popularbook2.png",
+    "title": "World Museums",
+    "author": "Jonathan Masst",
+    "price": "$23"
+  },
+  {
+    "id": 3,
+    "image": "/Popularbook3.png",
+    "title": "The Song of Achilles",
+    "author": "Madeline Miller",
+    "price": "$17"
+  },
+  {
+    "id": 4,
+    "image": "/Popularbook4.png",
+    "title": "The Answer Is",
+    "author": "Alex Trebek",
+    "price": "$9"
+  }
 ]

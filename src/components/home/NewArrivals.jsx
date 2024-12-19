@@ -1,4 +1,4 @@
-import popularBooks from "../../Fixtures/PopularBooks.json";
+import newBooks from "../../Fixtures/PopularBooks.json";
 
 function NewArrivals() {
   return (
@@ -9,25 +9,25 @@ function NewArrivals() {
         </h2>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 m-6 font-font1">
-        {popularBooks.map((popularBook) => (
+        {newBooks.map((newBook) => (
           <div
-            key={popularBook.id}
+            key={newBook.id}
             className="border border-customAsh rounded-lg shadow-md overflow-hidden"
           >
             <div>
               <img
-                src={popularBook.image}
-                alt={popularBook.title}
+                src={newBook.image}
+                alt={newBook.title}
                 className=" w-full h-full p-6 object-cover"
               />
             </div>
             <div className="pl-6 ">
               <h2 className="text-lg font-medium text-customBlack">
-                {popularBook.title}
+                {newBook.title}
               </h2>
-              <p className="text-sm  text-customAsh">{popularBook.author}</p>
+              <p className="text-sm  text-customAsh">{newBook.author}</p>
               <small className="text-sm text-customBlue font-bold ">
-                {popularBook.price}
+                {newBook.price}
               </small>
             </div>
           </div>

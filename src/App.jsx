@@ -12,6 +12,9 @@ import HomePage from "./pages/HomePage";
 import Blogs from "./components/Blogs";
 import AboutUs from "./components/AboutUs";
 import ContactUs from "./components/ContactUs";
+import ForgotPassword from "./pages/ForgotPassword";
+import NewPassword from "./pages/NewPassword";
+import PasswordSet from "./pages/PasswordSet";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +26,9 @@ const router = createBrowserRouter(
       <Route path="/blogs" element={<Blogs />} />
       <Route path="/about" element={<AboutUs />} />
       <Route path="/contact" element={<ContactUs />} />
+      <Route path="/forgotpassword" element={<ForgotPassword />} />
+      <Route path="/newpassword" element={<NewPassword />} />
+      <Route path="passwordset" element={<PasswordSet />} />
     </Route>
   )
 );

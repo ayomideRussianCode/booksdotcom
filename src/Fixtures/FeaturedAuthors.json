@@ -1,28 +1,27 @@
 [
-    {
-       "id": 1,
-       "image": "/FeaturedAuthor1.png",
-       "author": "Jonathan Rouch"
-    },
-    {
-        "id": 2,
-        "image": "/FeaturedAuthor2.png",
-        "author": "Amy Alward"
-      },
-      {
-        "id": 3,
-        "image": "/FeaturedAuthor3.png",
-        "author": "Louise Maclellan"
-      },
-      {
-        "id": 4,
-        "image": "/FeaturedAuthor4.png",
-        "author": "Alex Trebek "
-      },
-      {
-        "id": 5,
-        "image": "/FeaturedAuthor5.png",
-        "author": "Josh Luke "
-      }
-    
+  {
+    "id": 1,
+    "image": "/Featuredauthor1.png",
+    "author": "Jonathan Rouch"
+  },
+  {
+    "id": 2,
+    "image": "/Featuredauthor2.png",
+    "author": "Amy Alward"
+  },
+  {
+    "id": 3,
+    "image": "/Featuredauthor3.png",
+    "author": "Louise Maclellan"
+  },
+  {
+    "id": 4,
+    "image": "/Featuredauthor4.png",
+    "author": "Alex Trebek "
+  },
+  {
+    "id": 5,
+    "image": "/Featuredauthor5.png",
+    "author": "Josh Luke "
+  }
 ]
