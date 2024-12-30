@@ -1,14 +1,18 @@
+import LayOutWrapper from "../components/LayOutWrapper";
+import Illustration from "../components/Illustration";
+import AuthButton from "../components/AuthButton";
+
 function SignUpPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-customWhite font-font1">
+    <LayOutWrapper>
       <div className="flex w-full max-w-4xl  bg-customWhite">
-        <div className="hidden rounded-lg w-1/2 items-center justify-center md:flex">
+        <Illustration className="hidden rounded-lg w-1/2 items-center justify-center md:flex">
           <img
             src="/SigninImg.png"
             alt="Illustration"
             className="w-full h-auto"
           />
-        </div>
+        </Illustration>
 
         <div className="w-full md:w-1/2 p-8">
           <div>
@@ -22,15 +26,9 @@ function SignUpPage() {
           </p>
 
           <div className="flex space-x-4 justify-center mb-6">
-            <button className="px-8 py-2 rounded-lg border-2 border-customAsh ">
-              <img src="/google.png" alt="Google" className="w-4 h-4" />
-            </button>
-            <button className="px-8 rounded-lg border-2 border-customAsh ">
-              <img src="/facebook.png" alt="Facebook" className="w-4 h-4" />
-            </button>
-            <button className="px-8 rounded-lg border-2 border-customAsh ">
-              <img src="/basil_apple.png" alt="Apple" className="w-4 h-4" />
-            </button>
+            <AuthButton imgSrc="/google.png" altText="Google" />
+            <AuthButton imgSrc="/facebook.png" altText="Facebook" />
+            <AuthButton imgSrc="/basil_apple.png" altText="Apple" />
           </div>
 
           <div className="flex items-center justify-between mb-4">
@@ -120,7 +118,7 @@ function SignUpPage() {
           </p>
         </div>
       </div>
-    </div>
+    </LayOutWrapper>
   );
 }
 
