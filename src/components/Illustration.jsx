@@ -1,13 +1,7 @@
-function Illustration({
-  src,
-  alt,
-  className = "",
-  size = "w-1/2",
-  rounded = "rounded-lg",
-}) {
+function Illustration({ src, alt, className = "" }) {
   return (
     <div
-      className={`hidden ${size} ${rounded} items-center justify-center md:flex ${className}`}
+      className={`hidden rounded-lg items-center justify-center md:flex ${className}`}
     >
       <img src={src} alt={alt} className="w-full h-auto" />
     </div>

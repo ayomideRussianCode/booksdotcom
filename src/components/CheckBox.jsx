@@ -1,4 +1,4 @@
-function CheckBox({ label, linkText, linkHref }) {
+function CheckBoxSection({ label, linkText, linkHref }) {
   return (
     <div className="flex items-center justify-between mb-6">
       <label className="flex items-center">
@@ -17,3 +17,4 @@ function CheckBox({ label, linkText, linkHref }) {
     </div>
   );
 }
+export default CheckBoxSection;
