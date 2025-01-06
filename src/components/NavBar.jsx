@@ -15,7 +15,7 @@ function NavBar() {
           <img src="/Logo.png" alt="BOOKSDOTCOM" />
         </div>
 
-        <div className="hidden space-x-10 md:flex">
+        <div className="hidden space-x-8 md:flex">
           <NavLink
             to="/home"
             className="font-medium text-customBlue hover:underline decoration-customBlue decoration-2"
