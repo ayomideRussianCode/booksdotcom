@@ -7,36 +7,8 @@ import SocialMediaAuthButton from "../components/SocialMediaAuth";
 import Divider from "../components/Divider";
 import Form from "../components/Form";
 import RedirectMessage from "../components/RedirectMessage";
-import useFormHandler from "../components/useFormHandler";
-import Button from "../components/Button";
 
 function SignUpPage() {
-  const initialValues = { username: "", email: "", password: "" };
-  const { formData, handleChange, handleSubmit } =
-    useFormHandler(initialValues);
-
-  const apiFetch = async (data) => {
-    try {
-      const response = await fetch("https://your-api-endpoint.com/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP Error: ${response.status}`);
-      }
-
-      const result = await response.json();
-      console.log("Signup successful:", result);
-      return result;
-    } catch (error) {
-      console.error("Signup error:", error);
-    }
-  };
-
   const socialAuthPlatforms = [
     { imgSrc: "/google.png", alt: "Google" },
     { imgSrc: "/facebook.png", alt: "Facebook" },
@@ -76,9 +48,6 @@ function SignUpPage() {
             checkbox={checkBoxData}
             buttonText="Sign Up"
             buttonHref="/home"
-            formData={formData}
-            handleChange={handleChange}
-            handleSubmit={(e) => handleSubmit(e, apiFetch)}
           />
 
           <RedirectMessage

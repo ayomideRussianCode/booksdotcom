@@ -1,10 +1,10 @@
 import CheckBoxSection from "./CheckBox";
 import FormField from "./FormField";
-import Button from "./Button";
+import Button from "../components/Button";
 
-function Form({ fields, checkbox, handleSubmit, buttonText, buttonHref }) {
+function Form({ fields, checkbox, buttonText, buttonHref }) {
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       {fields.map((field) => (
         <FormField
           key={field.id}
