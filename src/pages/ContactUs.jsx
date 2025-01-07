@@ -1,5 +1,6 @@
 import NavBar from "../components/NavBar";
 import ContactForm from "../components/ContactForm";
+import Footer from "../components/Footer";
 
 function ContactUs() {
   const handleformSubmit = (e) => {
@@ -10,6 +11,7 @@ function ContactUs() {
     <>
       <NavBar />
       <ContactForm onSubmit={handleformSubmit} />
+      <Footer />
     </>
   );
 }
