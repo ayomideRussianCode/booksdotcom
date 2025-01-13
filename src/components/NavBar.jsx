@@ -56,7 +56,7 @@ function NavBar() {
 
         <button
           id="menu-btn"
-          className={`block hamburger md:hidden focus:outline-none ${
+          className={`block hamburger  lg:hidden md:hidden focus:outline-none ${
             isMenuOpen ? "open" : ""
           }`}
           onClick={toggleMenu}
@@ -67,7 +67,6 @@ function NavBar() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       <div
         id="menu"
         className={`absolute flex-col items-center ${

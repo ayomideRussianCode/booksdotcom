@@ -7,8 +7,14 @@ import SocialMediaAuthButton from "../components/SocialMediaAuth";
 import Divider from "../components/Divider";
 import Form from "../components/Form";
 import RedirectMessage from "../components/RedirectMessage";
+import { useState } from "react";
 
 function SignUpPage() {
+  const [name, setName] = useState();
+  const [emailAddress, setEmailAddress] = useState();
+  const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
+
   const socialAuthPlatforms = [
     { imgSrc: "/google.png", alt: "Google" },
     { imgSrc: "/facebook.png", alt: "Facebook" },

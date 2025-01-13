@@ -8,6 +8,7 @@ import Services4 from "../components/Services4";
 import Services5 from "../components/Services5";
 import NavBar from "../components/NavBar";
 import Discount from "../components/Discount";
+import Footer from "../components/Footer";
 
 const LandingPage = () => {
   return (
@@ -21,6 +22,7 @@ const LandingPage = () => {
       <Services3 />
       <Services4 />
       <Services5 />
+      <Footer />
     </>
   );
 };
