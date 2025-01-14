@@ -1,6 +1,6 @@
 import NavBar from "../components/NavBar";
 
-function Blogs({}) {
+function Blogs() {
   return (
     <>
       <NavBar />

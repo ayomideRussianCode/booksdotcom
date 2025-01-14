@@ -19,6 +19,7 @@ import PasswordSet from "./pages/PasswordSet";
 import ReadersDashboard from "./pages/ReadersDashboard";
 import Info1 from "./pages/Info1";
 import Info2 from "./pages/Info2";
+import PaymentDashboard from "./pages/PaymentDashboard";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -37,6 +38,7 @@ const router = createBrowserRouter(
       <Route path="/forgotpassword" element={<ForgotPassword />} />
       <Route path="/newpassword" element={<NewPassword />} />
       <Route path="passwordset" element={<PasswordSet />} />
+      <Route path="/paymentpage" element={<PaymentDashboard />} />
     </Route>
   )
 );
