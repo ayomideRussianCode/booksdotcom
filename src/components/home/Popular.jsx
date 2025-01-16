@@ -4,7 +4,7 @@ function PopularBooks() {
   return (
     <section id="popular-books">
       <div className="max-w-6xl font-font1 flex flex-col mx-auto ">
-        <h2 className="text-2xl text-left font-extralight  font-font2 py-4">
+        <h2 className="text-2xl text-left font-bold font-font2 py-4">
           Popular this month
         </h2>
       </div>
