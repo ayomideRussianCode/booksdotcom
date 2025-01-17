@@ -11,11 +11,7 @@ import Button from "../components/Button";
 import RedirectMessage from "../components/RedirectMessage";
 
 function SignUpPage() {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
+  const [formData, setFormData] = useState({});
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -28,10 +24,25 @@ function SignUpPage() {
   async function handleSubmit() {
     const newErrors = {};
     if (!formData.username) newErrors.username = "Name is required";
-    if (!formData.email) newErrors.email = "Email is required";
-    if (!formData.password) newErrors.password = "Password is required";
-    if (!formData.confirmPassword)
-      newErrors.confirmPassword = "Password confirmation is required";
+    if (!formData.email) {
+      newErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Invalid email format";
+    }
+    if (!formData.password) {
+      newErrors.password = "Password is required";
+    } else if (formData.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters";
+    }
+    if (formData.confirmPassword !== formData.password) {
+      newErrors.confirmPassword =
+        "Incorrect password. Please input correct password.";
+    } else if (!formData.confirmPassword) {
+      newErrors.confirmPassword = "Password is required";
+      // if (!checkBoxData)
+      //   newErrors.checkBoxData =
+      //     "Kindly agree with the privacy policy to proceed.";
+    }
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
@@ -56,7 +67,7 @@ function SignUpPage() {
         alert("Signed Up successfully", response.data);
       } catch (error) {
         if (error.response) {
-          alert("An error occurred.");
+          alert("Error data:", error.response.data);
         } else if (error.request) {
           alert("No response from server. Please try again.");
         } else {
@@ -122,7 +133,6 @@ function SignUpPage() {
           <Divider text="OR" />
           <Form fields={formFields} checkbox={checkBoxData} />
           <Button text="Sign Up" onClick={handleSubmit} />
-
           <RedirectMessage
             message="Already have an account"
             linkText="Log in"
