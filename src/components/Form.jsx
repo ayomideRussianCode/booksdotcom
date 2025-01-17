@@ -1,15 +1,18 @@
 import CheckBoxSection from "./CheckBox";
 import FormField from "./FormField";
-import Button from "../components/Button";
 
-function Form({ fields, checkbox, buttonText, buttonHref, className }) {
+function Form({ fields, checkbox, className }) {
   return (
     <form className={`${className}`}>
       {fields.map((field) => (
         <FormField
-          key={field.id}
+          key={field.name}
           type={field.type}
+          name={field.name}
+          value={field.value}
+          onChange={field.onChange}
           placeholder={field.placeholder}
+          error={field.error}
         />
       ))}
       <CheckBoxSection
@@ -17,7 +20,6 @@ function Form({ fields, checkbox, buttonText, buttonHref, className }) {
         linkText={checkbox.linkText}
         linkHref={checkbox.linkHref}
       />
-      <Button text={buttonText} href={buttonHref} className={`mt-10`} />
     </form>
   );
 }

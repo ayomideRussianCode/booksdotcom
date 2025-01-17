@@ -1,28 +1,106 @@
+import { useState } from "react";
+import axios from "axios";
 import LayOutWrapper from "../components/LayOutWrapper";
 import Illustration from "../components/Illustration";
 import Logo from "../components/Logo";
 import Title from "../components/Title";
 import Description from "../components/Description";
-import SocialMediaAuthButton from "../components/SocialMediaAuth";
 import Divider from "../components/Divider";
 import Form from "../components/Form";
+import Button from "../components/Button";
 import RedirectMessage from "../components/RedirectMessage";
 
 function SignUpPage() {
-  const socialAuthPlatforms = [
-    { imgSrc: "/google.png", alt: "Google" },
-    { imgSrc: "/facebook.png", alt: "Facebook" },
-    { imgSrc: "/basil_apple.png", alt: "Apple" },
-  ];
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  }
+
+  async function handleSubmit() {
+    const newErrors = {};
+    if (!formData.username) newErrors.username = "Name is required";
+    if (!formData.email) newErrors.email = "Email is required";
+    if (!formData.password) newErrors.password = "Password is required";
+    if (!formData.confirmPassword)
+      newErrors.confirmPassword = "Password confirmation is required";
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
+      setLoading(true);
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+
+      try {
+        const response = await axios.post(
+          "https://booksdotcom.onrender.com/api/v1/auth/register",
+          formData,
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          }
+        );
+        alert("Signed Up successfully", response.data);
+      } catch (error) {
+        if (error.response) {
+          alert("An error occurred.");
+        } else if (error.request) {
+          alert("No response from server. Please try again.");
+        } else {
+          alert("An unexpected error occurred");
+        }
+      } finally {
+        setLoading(false);
+      }
+    }
+  }
 
   const formFields = [
-    { type: "text", id: "name", placeholder: "Name" },
-    { type: "email", id: "email", placeholder: "Email" },
-    { type: "password", id: "password", placeholder: "Password" },
+    {
+      type: "text",
+      name: "username",
+      placeholder: "Name",
+      value: formData.username,
+      onChange: handleChange,
+      error: errors.username,
+    },
+    {
+      type: "email",
+      name: "email",
+      placeholder: "Email",
+      value: formData.email,
+      onChange: handleChange,
+      error: errors.email,
+    },
     {
       type: "password",
-      id: "confirmPassword",
+      name: "password",
+      placeholder: "Password",
+      value: formData.password,
+      onChange: handleChange,
+      error: errors.password,
+    },
+    {
+      type: "password",
+      name: "confirmPassword",
       placeholder: "Confirm Password",
+      value: formData.confirmPassword,
+      onChange: handleChange,
+      error: errors.confirmPassword,
+      disabled: loading,
     },
   ];
 
@@ -41,14 +119,9 @@ function SignUpPage() {
           <Logo src="/Logo.png" alt="BOOKSDOTCOM" />
           <Title text="Sign Up to BOOKS.COM" />
           <Description text="Create your account with just few steps" />
-          <SocialMediaAuthButton platforms={socialAuthPlatforms} />
           <Divider text="OR" />
-          <Form
-            fields={formFields}
-            checkbox={checkBoxData}
-            buttonText="Sign Up"
-            buttonHref="/home"
-          />
+          <Form fields={formFields} checkbox={checkBoxData} />
+          <Button text="Sign Up" onClick={handleSubmit} />
 
           <RedirectMessage
             message="Already have an account"
