@@ -20,6 +20,7 @@ import ReadersDashboard from "./pages/ReadersDashboard";
 import Info1 from "./pages/Info1";
 import Info2 from "./pages/Info2";
 import PaymentDashboard from "./pages/PaymentDashboard";
+import SignUpVerification from "./pages/SignUpVerification";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -39,6 +40,7 @@ const router = createBrowserRouter(
       <Route path="/newpassword" element={<NewPassword />} />
       <Route path="passwordset" element={<PasswordSet />} />
       <Route path="/paymentpage" element={<PaymentDashboard />} />
+      <Route path="/verificationpage" element={<SignUpVerification />} />
     </Route>
   )
 );
