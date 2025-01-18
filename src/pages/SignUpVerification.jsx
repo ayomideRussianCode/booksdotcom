@@ -1,25 +1,27 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import LayOutWrapper from "../components/LayOutWrapper";
 import Illustration from "../components/Illustration";
 import Logo from "../components/Logo";
-import Description from "../components/Description";
+import Title from "../components/Title";
 import CodeField from "../components/CodeField";
 
 function SignUpVerification() {
   const [verificationCode, setVerificationCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  async function handleVerification(params) {
-    if (!verificationCode) {
+  async function handleVerification(code) {
+    if (!code) {
       setError("Please enter the verification code.");
       return;
     }
 
     setLoading(true);
     try {
-      const response = await axios.post(
+      await axios.post(
         "https://booksdotcom.onrender.com/api/v1/auth/activation",
         { code: verificationCode },
         {
@@ -29,6 +31,7 @@ function SignUpVerification() {
         }
       );
       alert("Verification successful! You can now log in");
+      navigate("/login");
     } catch (err) {
       setError(
         err.response?.data?.message || "An error occurred during verification."
@@ -37,21 +40,23 @@ function SignUpVerification() {
       setLoading(false);
     }
   }
+  const handleResend = async () => {
+    alert("Verification code resent!");
+  };
   return (
     <LayOutWrapper>
       <div className="flex w-full max-w-4xl bg-customWhite">
         <Illustration src="/SigninImg.png" alt="Sign Up" />
         <div className="w-full md:w-1/2 p-8">
           <Logo src="/Logo.png" alt="BOOKSDOTCOM" />
-          <Description text="Enter the verification code sent to your email." />
+          <Title text="Enter the verification code sent to your email." />
+          {error && <p className="text-red-500 mb-4">{error}</p>}
           <CodeField
-            value={verificationCode}
+            onVerify={handleVerification}
+            onResend={handleResend}
             onChange={(e) => setVerificationCode(e.target.value)}
+            disabled={loading}
           />
-          {error && <p className="text-red-500">{error}</p>}
-          <button className="{`p-2">
-            {loading ? "Verifying..." : "Verify"}
-          </button>
         </div>
       </div>
     </LayOutWrapper>

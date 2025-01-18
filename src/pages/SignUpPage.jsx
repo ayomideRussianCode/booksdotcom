@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import LayOutWrapper from "../components/LayOutWrapper";
 import Illustration from "../components/Illustration";
 import Logo from "../components/Logo";
@@ -21,6 +22,7 @@ function SignUpPage() {
     setFormData({ ...formData, [name]: value });
   }
 
+  const navigate = useNavigate();
   async function handleSubmit() {
     const newErrors = {};
     if (!formData.username) newErrors.username = "Name is required";
@@ -66,6 +68,7 @@ function SignUpPage() {
           }
         );
         alert("Signed Up successfully", response.data);
+        navigate("/verify");
       } catch (error) {
         if (error.response) {
           alert("Error data:", error.response.data);
