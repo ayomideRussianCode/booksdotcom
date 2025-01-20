@@ -8,7 +8,6 @@ import Title from "../components/Title";
 import CodeField from "../components/CodeField";
 
 function SignUpVerification() {
-  const [verificationCode, setVerificationCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -23,7 +22,7 @@ function SignUpVerification() {
     try {
       await axios.post(
         "https://booksdotcom.onrender.com/api/v1/auth/activation",
-        { code: verificationCode },
+        { code },
         {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -40,8 +39,20 @@ function SignUpVerification() {
       setLoading(false);
     }
   }
+
   const handleResend = async () => {
-    alert("Verification code resent!");
+    setLoading(true);
+    try {
+      // Add resend verification API endpoint here
+      await axios.post(
+        "https://booksdotcom.onrender.com/api/v1/auth/activation"
+      );
+      alert("Verification code resent successfully!");
+    } catch (err) {
+      setError("Failed to resend verification code.");
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <LayOutWrapper>
@@ -54,7 +65,6 @@ function SignUpVerification() {
           <CodeField
             onVerify={handleVerification}
             onResend={handleResend}
-            onChange={(e) => setVerificationCode(e.target.value)}
             disabled={loading}
           />
         </div>
