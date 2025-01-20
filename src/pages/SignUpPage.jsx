@@ -68,7 +68,7 @@ function SignUpPage() {
           }
         );
         alert("Signed Up successfully", response.data);
-        navigate("/verify");
+        navigate("/login");
       } catch (error) {
         if (error.response) {
           alert("Error data:", error.response.data);
