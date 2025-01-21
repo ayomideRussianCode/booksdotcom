@@ -67,6 +67,7 @@ function SignUpPage() {
             },
           }
         );
+
         alert("Signed Up successfully", response.data);
         navigate("/login");
       } catch (error) {

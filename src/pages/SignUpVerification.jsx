@@ -19,19 +19,38 @@ function SignUpVerification() {
     }
 
     setLoading(true);
+    setError(""); // Clear previous errors
     try {
-      await axios.post(
+      const token = localStorage.getItem("authToken");
+
+      if (!token) {
+        setError(
+          "Your session has expired. Please request a new verification code."
+        );
+        setLoading(false); // Stop loading here to prevent indefinite spinner
+        return;
+      }
+
+      const formData = new URLSearchParams();
+      formData.append("otp", code);
+
+      const response = await axios.patch(
         "https://booksdotcom.onrender.com/api/v1/auth/activation",
-        { code },
+        formData,
         {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
+            Authorization: `Bearer ${token}`, // Fixed extra space
           },
         }
       );
-      alert("Verification successful! You can now log in");
-      navigate("/login");
+
+      if (response.status === 200) {
+        alert("Verification successful! You can now log in.");
+        navigate("/login");
+      }
     } catch (err) {
+      console.error("Error details:", err.response);
       setError(
         err.response?.data?.message || "An error occurred during verification."
       );
@@ -42,18 +61,39 @@ function SignUpVerification() {
 
   const handleResend = async () => {
     setLoading(true);
+    setError(""); // Clear any previous errors
     try {
-      // Add resend verification API endpoint here
-      await axios.post(
-        "https://booksdotcom.onrender.com/api/v1/auth/activation"
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+        setError("User is not authenticated. Please log in again.");
+        setLoading(false);
+        return;
+      }
+
+      const response = await axios.post(
+        "https://booksdotcom.onrender.com/api/v1/auth/init/verify",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
-      alert("Verification code resent successfully!");
+
+      if (response.status === 200) {
+        alert("Verification code resent! Please check your email.");
+      }
     } catch (err) {
-      setError("Failed to resend verification code.");
+      console.error("Resend error:", err.response);
+      setError(
+        err.response?.data?.message ||
+          "An error occurred while resending the code."
+      );
     } finally {
       setLoading(false);
     }
   };
+
   return (
     <LayOutWrapper>
       <div className="flex w-full max-w-4xl bg-customWhite">
@@ -72,4 +112,5 @@ function SignUpVerification() {
     </LayOutWrapper>
   );
 }
+
 export default SignUpVerification;

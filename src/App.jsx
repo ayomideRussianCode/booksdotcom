@@ -11,7 +11,6 @@ import LoginPage from "./pages/LogInPage";
 import SignUpPage from "./pages/SignUpPage";
 import GoogleSignUp from "./pages/GoogleSignUp";
 import HomePage from "./pages/HomePage";
-import Blogs from "./pages/Blogs";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -23,6 +22,7 @@ import Info2 from "./pages/Info2";
 import PaymentDashboard from "./pages/PaymentDashboard";
 import SignUpVerification from "./pages/SignUpVerification";
 import Verified from "./pages/Verified";
+import ResendVerification from "./pages/ResendVerification";
 
 const router = createBrowserRouter7(
   createRoutesFromElements7(
@@ -32,7 +32,6 @@ const router = createBrowserRouter7(
       <Route7 path="/signup" element={<SignUpPage />} />
       <Route7 path="/googlesignup" element={<GoogleSignUp />} />
       <Route7 path="/home" element={<HomePage />} />
-      <Route7 path="/blogs" element={<Blogs />} />
       <Route7 path="/about" element={<AboutUs />} />
       <Route7 path="/contact" element={<ContactUs />} />
       <Route7 path="/readersdashboard" element={<ReadersDashboard />} />
@@ -44,6 +43,7 @@ const router = createBrowserRouter7(
       <Route7 path="/paymentpage" element={<PaymentDashboard />} />
       <Route7 path="/verify" element={<SignUpVerification />} />
       <Route7 path="/verified" element={<Verified />} />
+      <Route7 path="/resendverification" element={<ResendVerification />} />
     </Route7>
   )
 );
