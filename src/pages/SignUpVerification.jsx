@@ -61,7 +61,7 @@ function SignUpVerification() {
 
   const handleResend = async () => {
     setLoading(true);
-    setError(""); // Clear any previous errors
+    setError("");
     try {
       const token = localStorage.getItem("authToken");
       if (!token) {
