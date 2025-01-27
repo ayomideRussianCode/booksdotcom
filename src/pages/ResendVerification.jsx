@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LayOutWrapper from "../components/LayOutWrapper";
 import Illustration from "../components/Illustration";
@@ -13,63 +13,35 @@ function ResendVerification() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [resendDisabled, setResendDisabled] = useState(false);
-  const [timer, setTimer] = useState(0);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (timer > 0) {
-      const countdown = setInterval(() => {
-        setTimer((prev) => prev - 1);
-      }, 1000);
-      return () => clearInterval(countdown); // Cleanup the interval
-    } else {
-      setResendDisabled(false);
-    }
-  }, [timer]);
-
   const handleResend = async () => {
+    setLoading(true);
     setError("");
     setSuccessMessage("");
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email) {
       setError("Please enter your email address.");
+      setLoading(false);
       return;
     } else if (!emailRegex.test(email)) {
       setError("Please enter a valid email address.");
+      setLoading(false);
       return;
     }
 
-    setLoading(true);
-    setResendDisabled(true);
-    setTimer(60);
-
-    setLoading(true);
-    setResendDisabled(true);
     try {
-      const formData = new URLSearchParams();
-      formData.append("email", email);
-
       const response = await axios.post(
         "https://booksdotcom.onrender.com/api/v1/auth/init/verify",
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        }
+        { email }
       );
+
       if (response.status === 200) {
-        const { token } = response.data;
-        localStorage.setItem("authToken", token);
-        setSuccessMessage(
-          "Verification code resent successfully! Check your email."
-        );
-        setTimeout(() => navigate("/verify"), 2000);
+        setSuccessMessage("Verification code resent! Please check your email.");
       }
     } catch (err) {
-      console.error("Error response:", err.response?.data?.errors);
+      console.error("Resend error:", err.response);
       setError(
         err.response?.data?.message ||
           "An error occurred while resending the code."
@@ -77,6 +49,11 @@ function ResendVerification() {
     } finally {
       setLoading(false);
     }
+  };
+  const handleInputChange = (e) => {
+    setEmail(e.target.value);
+    setError("");
+    setSuccessMessage("");
   };
 
   return (
@@ -91,30 +68,16 @@ function ResendVerification() {
             <p className="text-green-500 mb-4">{successMessage}</p>
           )}
           <FormField
-            label="Email Address"
+            label="Registered Email Address"
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleInputChange}
           />
           <Button
-            text={
-              loading
-                ? "Resending..."
-                : resendDisabled
-                ? `Resend Code (${timer}s)`
-                : "Resend Code"
-            }
-            onClick={handleResend}
-            disabled={loading || resendDisabled}
+            text={loading ? "Resending..." : "Resend Code"}
+            onClick={() => navigate("/verify")}
+            disabled={loading}
           />
-          {successMessage && (
-            <button
-              className="mt-4 text-customBlue underline"
-              onClick={() => navigate("/verify")}
-            >
-              Go to Verification
-            </button>
-          )}
         </div>
       </div>
     </LayOutWrapper>

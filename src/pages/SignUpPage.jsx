@@ -10,6 +10,7 @@ import Divider from "../components/Divider";
 import Form from "../components/Form";
 import Button from "../components/Button";
 import RedirectMessage from "../components/RedirectMessage";
+import SocialButtonsGroup from "../components/SocialButtonsGroup";
 
 function SignUpPage() {
   const [formData, setFormData] = useState({});
@@ -25,7 +26,7 @@ function SignUpPage() {
   const navigate = useNavigate();
   async function handleSubmit() {
     const newErrors = {};
-    if (!formData.username) newErrors.username = "Name is required";
+    if (!formData.name) newErrors.name = "Name is required";
     if (!formData.email) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -51,7 +52,7 @@ function SignUpPage() {
     if (Object.keys(newErrors).length === 0) {
       setLoading(true);
       setFormData({
-        username: "",
+        name: "",
         email: "",
         password: "",
         confirmPassword: "",
@@ -67,9 +68,9 @@ function SignUpPage() {
             },
           }
         );
-
+        localStorage.setItem("authToken", response.data.token);
         alert("Signed Up successfully", response.data);
-        navigate("/login");
+        navigate("/verify");
       } catch (error) {
         if (error.response) {
           alert("Error data:", error.response.data);
@@ -87,11 +88,11 @@ function SignUpPage() {
   const formFields = [
     {
       type: "text",
-      name: "username",
+      name: "name",
       placeholder: "Name",
-      value: formData.username,
+      value: formData.name,
       onChange: handleChange,
-      error: errors.username,
+      error: errors.name,
     },
     {
       type: "email",
@@ -122,28 +123,26 @@ function SignUpPage() {
 
   const checkBoxData = {
     label: "I agree with the",
-    linkText: "Privacy Policy",
+    linkText: " Privacy Policy ",
     linkHref: "/privacypolicy",
   };
 
   return (
     <LayOutWrapper>
-      <div className="flex w-full max-w-4xl bg-customWhite">
-        <Illustration src="/SigninImg.png" alt="/Signin-Illustration" />
-
-        <div className="w-full md:w-1/2 p-8">
-          <Logo src="/Logo.png" alt="BOOKSDOTCOM" />
-          <Title text="Sign Up to BOOKS.COM" />
-          <Description text="Create your account with just few steps" />
-          <Divider text="OR" />
-          <Form fields={formFields} checkbox={checkBoxData} />
-          <Button text="Sign Up" onClick={handleSubmit} />
-          <RedirectMessage
-            message="Already have an account"
-            linkText="Log in"
-            linkHref="/login"
-          />
-        </div>
+      <Illustration src="/SigninImg.png" alt="/Signin-Illustration" />
+      <div className="w-full md:w-1/2 p-8">
+        <Logo src="/Logo.png" alt="BOOKSDOTCOM" />
+        <Title text="Sign Up to BOOKS.COM" />
+        <Description text="Create your account with just few steps" />
+        <SocialButtonsGroup />
+        <Divider text="OR" />
+        <Form fields={formFields} checkbox={checkBoxData} />
+        <Button text="Sign Up" onClick={handleSubmit} />
+        <RedirectMessage
+          message=" Already have an account? "
+          linkText=" Log in "
+          linkHref="/login"
+        />
       </div>
     </LayOutWrapper>
   );

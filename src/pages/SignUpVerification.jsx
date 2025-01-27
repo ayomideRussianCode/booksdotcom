@@ -19,7 +19,7 @@ function SignUpVerification() {
     }
 
     setLoading(true);
-    setError(""); // Clear previous errors
+    setError("");
     try {
       const token = localStorage.getItem("authToken");
 
@@ -27,12 +27,17 @@ function SignUpVerification() {
         setError(
           "Your session has expired. Please request a new verification code."
         );
-        setLoading(false); // Stop loading here to prevent indefinite spinner
+        setLoading(false);
         return;
       }
 
       const formData = new URLSearchParams();
       formData.append("otp", code);
+
+      console.log("Sending Request with:");
+      console.log("Token:", token);
+      console.log("OTP:", code);
+      console.log("Using Token:", token);
 
       const response = await axios.patch(
         "https://booksdotcom.onrender.com/api/v1/auth/activation",
@@ -40,13 +45,14 @@ function SignUpVerification() {
         {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
-            Authorization: `Bearer ${token}`, // Fixed extra space
+            Authorization: `Bearer ${token}`,
           },
         }
       );
 
       if (response.status === 200) {
         alert("Verification successful! You can now log in.");
+        localStorage.removeItem("authToken");
         navigate("/login");
       }
     } catch (err) {
@@ -59,41 +65,6 @@ function SignUpVerification() {
     }
   }
 
-  const handleResend = async () => {
-    setLoading(true);
-    setError("");
-    try {
-      const token = localStorage.getItem("authToken");
-      if (!token) {
-        setError("User is not authenticated. Please log in again.");
-        setLoading(false);
-        return;
-      }
-
-      const response = await axios.post(
-        "https://booksdotcom.onrender.com/api/v1/auth/init/verify",
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        alert("Verification code resent! Please check your email.");
-      }
-    } catch (err) {
-      console.error("Resend error:", err.response);
-      setError(
-        err.response?.data?.message ||
-          "An error occurred while resending the code."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <LayOutWrapper>
       <div className="flex w-full max-w-4xl bg-customWhite">
@@ -104,7 +75,7 @@ function SignUpVerification() {
           {error && <p className="text-red-500 mb-4">{error}</p>}
           <CodeField
             onVerify={handleVerification}
-            onResend={handleResend}
+            onResend={() => navigate("/resendverification")}
             disabled={loading}
           />
         </div>
