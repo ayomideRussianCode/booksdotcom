@@ -14,7 +14,7 @@ const Categories = () => {
         <ul className=" flex flex-wrap justify-center gap-4">
           <li>
             {" "}
-            <button className="bg-customWhite text-customBlack font-medium py-2 px-6 border-2 border-customBlack rounded-full ">
+            <button className="bg-customWhite text-customBlack font-medium py-2 px-6 border-2 border-customBlack hover:bg-customBlue rounded-full ">
               <Link href="a">Games & Activities</Link>
             </button>
           </li>

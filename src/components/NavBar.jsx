@@ -15,7 +15,7 @@ function NavBar() {
           <img src="/Logo.png" alt="BOOKSDOTCOM" />
         </div>
 
-        <div className="hidden space-x-10 md:flex">
+        <div className="hidden space-x-8 md:flex">
           <NavLink
             to="/home"
             className="font-medium text-customBlue hover:underline decoration-customBlue decoration-2"
@@ -56,7 +56,7 @@ function NavBar() {
 
         <button
           id="menu-btn"
-          className={`block hamburger md:hidden focus:outline-none ${
+          className={`block hamburger  lg:hidden md:hidden focus:outline-none ${
             isMenuOpen ? "open" : ""
           }`}
           onClick={toggleMenu}
@@ -67,7 +67,6 @@ function NavBar() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       <div
         id="menu"
         className={`absolute flex-col items-center ${

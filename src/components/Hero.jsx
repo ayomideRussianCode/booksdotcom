@@ -13,7 +13,7 @@ function Hero() {
           <div className=" flex justify-center md:justify-start">
             <a
               className="p-2 px-16 pt-2  text-customWhite font-font1 bg-customBlue rounded-full"
-              href="a"
+              href="/login"
             >
               Shop Collections
             </a>

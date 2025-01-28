@@ -38,5 +38,3 @@ function BestSelling() {
 }
 
 export default BestSelling;
-
-// {book.discount && (<span className="left-0 bg-red-500 text-white text-xs font-bold px-6 py-2 rounded-br-lg">{book.discount} off</span>)}

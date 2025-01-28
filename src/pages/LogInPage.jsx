@@ -1,101 +1,93 @@
-function LoginPage() {
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import LayOutWrapper from "../components/LayOutWrapper";
+import Illustration from "../components/Illustration";
+import Logo from "../components/Logo";
+import Title from "../components/Title";
+import FormField from "../components/FormField";
+import Button from "../components/Button";
+import Description from "../components/Description";
+import Divider from "../components/Divider";
+import RedirectMessage from "../components/RedirectMessage";
+
+function LogInPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = async () => {
+    setLoading(true);
+    setError("");
+
+    try {
+      if (!email || !password) {
+        setError("Both email and password are required.");
+        setLoading(false);
+        return;
+      }
+
+      const response = await axios.post(
+        "https://booksdotcom.onrender.com/api/v1/auth/login",
+        { email, password }
+      );
+
+      if (response.status === 200) {
+        const { token, user } = response.data;
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
+
+        navigate("/home");
+      }
+    } catch (err) {
+      console.error("Login error:", err.response);
+      setError(
+        err.response?.data?.message ||
+          "An error occurred while logging in. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-customWhite font-font1">
-      <div className="flex w-full max-w-4xl  bg-customWhite">
-        <div className="hidden rounded-lg w-1/2 items-center justify-center md:flex">
-          <img
-            src="/Loginimg.png"
-            alt="Illustration"
-            className="w-full h-auto"
-          />
-        </div>
-
-        <div className="w-full md:w-1/2 p-8">
-          <div>
-            <img className="hidden md:flex" src="/Logo.png" alt="Logo" />
-          </div>
-          <h2 className="text-2xl pb-2 font-bold text-center text-customBlack">
-            Login to Your Account
-          </h2>
-          <p className="text-xs text-center text-customAsh mb-6">
-            Welcome back! Select a method to log in.
-          </p>
-
-          <div className="flex space-x-4 justify-center mb-6">
-            <button className="px-8 py-2 rounded-lg border-2 border-customAsh ">
-              <img src="/google.png" alt="Google" className="w-4 h-4" />
-            </button>
-            <button className="px-8 rounded-lg border-2 border-customAsh ">
-              <img src="/facebook.png" alt="Facebook" className="w-4 h-4" />
-            </button>
-            <button className="px-8 rounded-lg border-2 border-customAsh ">
-              <img src="basil_apple.png" alt="Apple" className="w-4 h-4" />
-            </button>
-          </div>
-
-          <div className="flex items-center justify-between mb-4">
-            <hr className="w-1/3 border-customAsh" />
-            <span className="text-customAsh text-sm">OR</span>
-            <hr className="w-1/3 border-customAsh" />
-          </div>
-
-          <form>
-            <div className="mb-4">
-              <label
-                htmlFor="email"
-                className="block text-gray-700 text-sm font-medium"
-              ></label>
-              <input
-                type="email"
-                id="email"
-                placeholder="Email"
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-customBlue"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label
-                htmlFor="password"
-                className="block text-customBlue text-sm font-medium"
-              ></label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Password"
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-customBlue"
-              />
-            </div>
-
-            <div className="flex items-center justify-between mb-6">
-              <label className="flex items-center">
-                <input type="checkbox" className="mr-2" />
-                <span className="text-sm text-customBlack">Remember me</span>
-              </label>
-              <a
-                href="/forgotpassword"
-                className="text-sm text-customBlack hover:underline"
-              >
-                Forgot Password?
-              </a>
-            </div>
-
-            <button className="w-full bg-customBlue py-2 mt-10 rounded-full">
-              <a className="text-customWhite" href="/home">
-                Log In
-              </a>
-            </button>
-          </form>
-
-          <p className="text-sm text-center text-customBlack mt-6">
-            New user?{" "}
-            <a href="/signup" className="text-customBlue hover:underline">
-              Create an account
-            </a>
-          </p>
-        </div>
+    <LayOutWrapper>
+      <Illustration src="/SigninImg.png" alt="Login" />
+      <div className="w-full md:w-1/2 p-8">
+        <Logo src="/Logo.png" alt="BOOKSDOTCOM" />
+        <Title text="Log in to your account" />
+        <Description text="Create your account with just few steps" />
+        {error && <p className="text-red-500 mb-4">{error}</p>}
+        <Divider text="OR" />
+        <FormField
+          label="Email Address"
+          type="email"
+          placeholder="Enter Email Address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <FormField
+          label="Password"
+          type="password"
+          placeholder="Enter Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button
+          text={loading ? "Logging in..." : "Log In"}
+          onClick={handleLogin}
+          disabled={loading}
+        />
+        <RedirectMessage
+          message=" Don't have an account? "
+          linkText=" Sign Up "
+          linkHref="/signup"
+        />
       </div>
-    </div>
+    </LayOutWrapper>
   );
 }
 
-export default LoginPage;
+export default LogInPage;
