@@ -42,10 +42,6 @@ function SignUpPage() {
         "Incorrect password. Please input correct password.";
     } else if (!formData.confirmPassword) {
       newErrors.confirmPassword = "Password is required";
-
-      // if (!checkBoxData)
-      //   newErrors.checkBoxData =
-      //     "Kindly agree with the privacy policy to proceed.";
     }
     setErrors(newErrors);
 

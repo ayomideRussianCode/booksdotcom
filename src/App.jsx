@@ -23,6 +23,9 @@ import PaymentDashboard from "./pages/PaymentDashboard";
 import SignUpVerification from "./pages/SignUpVerification";
 import Verified from "./pages/Verified";
 import ResendVerification from "./pages/ResendVerification";
+import RoleSelector from "./pages/RoleSelector";
+import CategorySelector from "./pages/CategorySelector";
+import CreatorsProfile from "./pages/CreatorsProfile";
 
 const router = createBrowserRouter7(
   createRoutesFromElements7(
@@ -44,6 +47,9 @@ const router = createBrowserRouter7(
       <Route7 path="/verify" element={<SignUpVerification />} />
       <Route7 path="/verified" element={<Verified />} />
       <Route7 path="/resendverification" element={<ResendVerification />} />
+      <Route7 path="/roleselection" element={<RoleSelector />} />
+      <Route7 path="/categories" element={<CategorySelector />} />
+      <Route7 path="/creator" element={<CreatorsProfile />} />
     </Route7>
   )
 );

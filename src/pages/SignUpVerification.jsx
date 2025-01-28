@@ -51,9 +51,9 @@ function SignUpVerification() {
       );
 
       if (response.status === 200) {
-        alert("Verification successful! You can now log in.");
+        alert("Verification successful! You can now pick a role.");
         localStorage.removeItem("authToken");
-        navigate("/login");
+        navigate("/roleselection");
       }
     } catch (err) {
       console.error("Error details:", err.response);
