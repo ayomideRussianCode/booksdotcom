@@ -26,6 +26,7 @@ import ResendVerification from "./pages/ResendVerification";
 import RoleSelector from "./pages/RoleSelector";
 import CategorySelector from "./pages/CategorySelector";
 import CreatorsProfile from "./pages/CreatorsProfile";
+import ResetCode from "./pages/ResetCode";
 
 const router = createBrowserRouter7(
   createRoutesFromElements7(
@@ -50,6 +51,7 @@ const router = createBrowserRouter7(
       <Route7 path="/roleselection" element={<RoleSelector />} />
       <Route7 path="/categories" element={<CategorySelector />} />
       <Route7 path="/creator" element={<CreatorsProfile />} />
+      <Route7 path="/resetcode" element={<ResetCode />} />
     </Route7>
   )
 );

@@ -1,46 +1,89 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import LayOutWrapper from "../components/LayOutWrapper";
+import Illustration from "../components/Illustration";
+import Logo from "../components/Logo";
+import Title from "../components/Title";
+import FormField from "../components/FormField";
+import Button from "../components/Button";
+
 function ForgotPassword() {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const navigate = useNavigate();
+
+  const handleForgotPassword = async () => {
+    setLoading(true);
+    setError("");
+    setSuccessMessage("");
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+      setError("Please enter your email address.");
+      setLoading(false);
+      return;
+    } else if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address.");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "https://booksdotcom.onrender.com/api/v1/auth/forget",
+        { email }
+      );
+      if (response.status === 200) {
+        setSuccessMessage("Password reset code sent! Please check your email.");
+        setTimeout(() => navigate("/resetcode"), 2000);
+      }
+    } catch (err) {
+      console.error("Resend error:", err.response);
+      setError(
+        err.response?.data?.message ||
+          "Failed to process forgot password request."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+  const handleInputChange = (e) => {
+    setEmail(e.target.value);
+    setError("");
+    setSuccessMessage("");
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-customWhite font-font1">
-      <div className="flex w-full max-w-4xl  bg-customWhite">
-        <div className="hidden rounded-lg w-1/2 items-center justify-center md:flex">
-          <img
-            src="/forgotpassword.png"
-            alt="Illustration"
-            className="w-full h-auto"
+    <LayOutWrapper>
+      <div className="flex w-full max-w-4xl bg-customWhite">
+        <Illustration src="/SigninImg.png" alt="Forgot Password" />
+        <div className="w-full md:w-1/2 p-8">
+          <Logo src="/Logo.png" alt="BOOKSDOTCOM" />
+          <Title text="Enter registered Email Address" />
+
+          {error && <p className="text-red-500 mb-4">{error}</p>}
+          {successMessage && (
+            <p className="text-green-500 mb-4">{successMessage}</p>
+          )}
+
+          <FormField
+            label="Enter your Email Address"
+            type="email"
+            value={email}
+            onChange={handleInputChange}
+          />
+
+          <Button
+            text={loading ? "Sending..." : "Send Reset Code "}
+            onClick={handleForgotPassword}
+            disabled={loading}
           />
         </div>
-
-        <div className="w-full md:w-1/2 p-8">
-          <div>
-            <img className="hidden md:flex" src="/Logo.png" alt="Logo" />
-          </div>
-          <h2 className="text-2xl pb-2 font-bold text-center text-customBlack">
-            Forgot Password?
-          </h2>
-          <p className="text-xs text-center text-customAsh mb-6">
-            Enter your email for instructions
-          </p>
-
-          <form>
-            <div className="mb-4">
-              <label
-                htmlFor="email"
-                className="block text-customAsh text-sm font-medium"
-              ></label>
-              <input
-                type="email"
-                id="email"
-                placeholder="Enter your email"
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-customBlue"
-              />
-            </div>
-            <button className="w-full bg-customBlue text-customWhite py-2 mt-10 rounded-full">
-              Set new password
-            </button>
-          </form>
-        </div>
       </div>
-    </div>
+    </LayOutWrapper>
   );
 }
 
