@@ -10,7 +10,7 @@ import Divider from "../components/Divider";
 import Form from "../components/Form";
 import Button from "../components/Button";
 import RedirectMessage from "../components/RedirectMessage";
-import SocialButtonsGroup from "../components/SocialButtonsGroup";
+import SocialAuth from "../components/SocialAuth";
 
 function SignUpPage() {
   const [formData, setFormData] = useState({});
@@ -130,7 +130,7 @@ function SignUpPage() {
         <Logo src="/Logo.png" alt="BOOKSDOTCOM" />
         <Title text="Sign Up to BOOKS.COM" />
         <Description text="Create your account with just few steps" />
-        <SocialButtonsGroup />
+        <SocialAuth />
         <Divider text="OR" />
         <Form fields={formFields} checkbox={checkBoxData} />
         <Button text="Sign Up" onClick={handleSubmit} />

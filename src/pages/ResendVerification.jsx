@@ -39,6 +39,7 @@ function ResendVerification() {
 
       if (response.status === 200) {
         setSuccessMessage("Verification code resent! Please check your email.");
+        setTimeout(() => navigate("/verify"), 2000);
       }
     } catch (err) {
       console.error("Resend error:", err.response);
@@ -62,7 +63,7 @@ function ResendVerification() {
         <Illustration src="/SigninImg.png" alt="Resend Verification" />
         <div className="w-full md:w-1/2 p-8">
           <Logo src="/Logo.png" alt="BOOKSDOTCOM" />
-          <Title text="Enter registered email" />
+          <Title text="Enter registered Email Address" />
           {error && <p className="text-red-500 mb-4">{error}</p>}
           {successMessage && (
             <p className="text-green-500 mb-4">{successMessage}</p>
@@ -75,7 +76,7 @@ function ResendVerification() {
           />
           <Button
             text={loading ? "Resending..." : "Resend Code"}
-            onClick={() => navigate("/verify")}
+            onClick={handleResend}
             disabled={loading}
           />
         </div>

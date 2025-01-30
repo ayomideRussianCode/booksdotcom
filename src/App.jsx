@@ -14,8 +14,6 @@ import HomePage from "./pages/HomePage";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import ForgotPassword from "./pages/ForgotPassword";
-import NewPassword from "./pages/NewPassword";
-import PasswordSet from "./pages/PasswordSet";
 import ReadersDashboard from "./pages/ReadersDashboard";
 import Info1 from "./pages/Info1";
 import Info2 from "./pages/Info2";
@@ -26,6 +24,7 @@ import ResendVerification from "./pages/ResendVerification";
 import RoleSelector from "./pages/RoleSelector";
 import CategorySelector from "./pages/CategorySelector";
 import CreatorsProfile from "./pages/CreatorsProfile";
+import ResetPassword from "./pages/ResetPassword";
 
 const router = createBrowserRouter7(
   createRoutesFromElements7(
@@ -41,8 +40,6 @@ const router = createBrowserRouter7(
       <Route7 path="/info1" element={<Info1 />} />
       <Route7 path="/info2" element={<Info2 />} />
       <Route7 path="/forgotpassword" element={<ForgotPassword />} />
-      <Route7 path="/newpassword" element={<NewPassword />} />
-      <Route7 path="passwordset" element={<PasswordSet />} />
       <Route7 path="/paymentpage" element={<PaymentDashboard />} />
       <Route7 path="/verify" element={<SignUpVerification />} />
       <Route7 path="/verified" element={<Verified />} />
@@ -50,6 +47,7 @@ const router = createBrowserRouter7(
       <Route7 path="/roleselection" element={<RoleSelector />} />
       <Route7 path="/categories" element={<CategorySelector />} />
       <Route7 path="/creator" element={<CreatorsProfile />} />
+      <Route7 path="/resetpassword" element={<ResetPassword />} />
     </Route7>
   )
 );
