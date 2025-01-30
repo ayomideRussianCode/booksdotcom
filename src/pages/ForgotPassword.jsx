@@ -35,7 +35,7 @@ const ForgotPasswordPage = () => {
       // Handle successful response (200)
       if (response.status === 200) {
         setSuccessMessage(
-          "Reset token has been sent to your email. Please check your inbox."
+          "Reset link has been sent to your email. Please check your inbox."
         );
         // Wait for 3 seconds before redirecting to login
         setTimeout(() => {
