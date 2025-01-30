@@ -76,6 +76,7 @@ const ResetPassword = () => {
             setError(
               "Invalid or expired reset token. Please request a new one."
             );
+            console.log("response from backend", err);
             break;
           default:
             setError("Failed to reset password. Please try again.");
