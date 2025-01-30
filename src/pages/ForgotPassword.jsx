@@ -8,7 +8,7 @@ import Title from "../components/Title";
 import FormField from "../components/FormField";
 import Button from "../components/Button";
 
-const ForgotPasswordPage = () => {
+function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -100,6 +100,6 @@ const ForgotPasswordPage = () => {
       </div>
     </LayOutWrapper>
   );
-};
+}
 
-export default ForgotPasswordPage;
+export default ForgotPassword;

@@ -50,7 +50,7 @@ const ResetPassword = () => {
       }
 
       // Make reset request with bearer token
-      await axios.post(
+      await axios.put(
         "https://booksdotcom.onrender.com/api/v1/auth/reset",
         {
           password: newPassword,
@@ -98,7 +98,7 @@ const ResetPassword = () => {
               Invalid reset link. Please request a new one.
             </p>
             <button
-              onClick={() => navigate("/forgot-password")}
+              onClick={() => navigate("/forgotpassword")}
               className="mt-4 text-blue-600 hover:text-blue-500"
             >
               Back to Forgot Password
