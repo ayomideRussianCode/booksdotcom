@@ -8,7 +8,7 @@ import Title from "../components/Title";
 import FormField from "../components/FormField";
 import Button from "../components/Button";
 
-const ResetPassword = () => {
+function ResetPassword() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -43,8 +43,8 @@ const ResetPassword = () => {
         return;
       }
 
-      if (newPassword.length < 6) {
-        setError("Password must be at least 6 characters long");
+      if (newPassword.length < 8) {
+        setError("Password must be at least 8 characters long");
         setLoading(false);
         return;
       }
@@ -53,11 +53,11 @@ const ResetPassword = () => {
       await axios.put(
         "https://booksdotcom.onrender.com/api/v1/auth/reset",
         {
+          token: token,
           password: newPassword,
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
             "Content-Type": "application/x-www-form-urlencoded",
           },
         }
@@ -154,6 +154,6 @@ const ResetPassword = () => {
       </div>
     </LayOutWrapper>
   );
-};
+}
 
 export default ResetPassword;
