@@ -19,7 +19,6 @@ import Info1 from "./pages/Info1";
 import Info2 from "./pages/Info2";
 import PaymentDashboard from "./pages/PaymentDashboard";
 import SignUpVerification from "./pages/SignUpVerification";
-import Verified from "./pages/Verified";
 import ResendVerification from "./pages/ResendVerification";
 import RoleSelector from "./pages/RoleSelector";
 import CategorySelector from "./pages/CategorySelector";
@@ -42,7 +41,6 @@ const router = createBrowserRouter7(
       <Route7 path="/forgotpassword" element={<ForgotPassword />} />
       <Route7 path="/paymentpage" element={<PaymentDashboard />} />
       <Route7 path="/verify" element={<SignUpVerification />} />
-      <Route7 path="/verified" element={<Verified />} />
       <Route7 path="/resendverification" element={<ResendVerification />} />
       <Route7 path="/roleselection" element={<RoleSelector />} />
       <Route7 path="/categories" element={<CategorySelector />} />

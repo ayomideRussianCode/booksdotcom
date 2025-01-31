@@ -32,18 +32,15 @@ function ForgotPassword() {
         { email }
       );
 
-      // Handle successful response (200)
       if (response.status === 200) {
         setSuccessMessage(
           "Reset link has been sent to your email. Please check your inbox."
         );
-        // Wait for 3 seconds before redirecting to login
         setTimeout(() => {
           navigate("/resetpassword");
         }, 3000);
       }
     } catch (err) {
-      // Handle specific error status codes
       if (err.response) {
         switch (err.response.status) {
           case 400:
