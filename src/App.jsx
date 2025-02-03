@@ -43,7 +43,7 @@ const router = createBrowserRouter7(
       <Route7 path="/verify" element={<SignUpVerification />} />
       <Route7 path="/resendverification" element={<ResendVerification />} />
       <Route7 path="/roleselection" element={<RoleSelector />} />
-      <Route7 path="/categories" element={<CategorySelector />} />
+      <Route7 path="/categoriesselector" element={<CategorySelector />} />
       <Route7 path="/creator" element={<CreatorsProfile />} />
       <Route7 path="/resetpassword" element={<ResetPassword />} />
     </Route7>
