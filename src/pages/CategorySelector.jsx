@@ -1,7 +1,12 @@
 import React from "react";
+import Categories from "../components/home/Categories";
 
 function CategorySelector() {
-  return <div>CategorySelector</div>;
+  return (
+    <>
+      <Categories />
+    </>
+  );
 }
 
 export default CategorySelector;

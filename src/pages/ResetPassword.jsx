@@ -16,7 +16,6 @@ function ResetPassword() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Get token from URL
   const token = new URLSearchParams(location.search).get("token");
 
   const handleReset = async () => {
@@ -24,7 +23,6 @@ function ResetPassword() {
     setError("");
 
     try {
-      // Validation checks
       if (!token) {
         setError("Invalid reset link. Please request a new one.");
         setLoading(false);
@@ -49,7 +47,6 @@ function ResetPassword() {
         return;
       }
 
-      // Make reset request with bearer token
       await axios.put(
         "https://booksdotcom.onrender.com/api/v1/auth/reset",
         {
@@ -63,7 +60,6 @@ function ResetPassword() {
         }
       );
 
-      // Show success message and redirect
       alert("Password has been reset successfully!");
       navigate("/login");
     } catch (err) {
@@ -89,7 +85,6 @@ function ResetPassword() {
     }
   };
 
-  // If no token is present, show error and redirect
   if (!token) {
     return (
       <LayOutWrapper>

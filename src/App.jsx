@@ -24,6 +24,7 @@ import RoleSelector from "./pages/RoleSelector";
 import CategorySelector from "./pages/CategorySelector";
 import CreatorsProfile from "./pages/CreatorsProfile";
 import ResetPassword from "./pages/ResetPassword";
+import SearchResultsPage from "./pages/SearchResultsPage";
 
 const router = createBrowserRouter7(
   createRoutesFromElements7(
@@ -43,9 +44,10 @@ const router = createBrowserRouter7(
       <Route7 path="/verify" element={<SignUpVerification />} />
       <Route7 path="/resendverification" element={<ResendVerification />} />
       <Route7 path="/roleselection" element={<RoleSelector />} />
-      <Route7 path="/categories" element={<CategorySelector />} />
+      <Route7 path="/categoriesselector" element={<CategorySelector />} />
       <Route7 path="/creator" element={<CreatorsProfile />} />
       <Route7 path="/resetpassword" element={<ResetPassword />} />
+      <Route7 path="/searchresultspage" element={<SearchResultsPage />} />
     </Route7>
   )
 );
