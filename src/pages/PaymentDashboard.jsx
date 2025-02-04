@@ -13,6 +13,15 @@ function PaymentDashboard() {
   return (
     <div>
       <NavBar2 cartItems={cartItems} addToCart={addToCart} />
+      <div className="w-full flex flex-row gap-3 font-font1 mt-4 overflow-x-auto whitespace-nowrap">
+        <p>Games & Activities |</p>
+        <p>Classic |</p>
+        <p>Action & Adventure Fiction Art |</p>
+        <p>Children's |</p>
+        <p>Business Career & Growth |</p>
+        <p>Comics & Graphic Novels |</p>
+        <p>Fantasy</p>
+      </div>
       <div className="flex flex-col md:flex-row gap-3 pt-12">
         <p>Books {">"} </p>
         <p>Literature & Fiction {">"} </p>
