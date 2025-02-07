@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import BookCard from "../components/BookCard";
+import NavBar2 from "../components/NavBar2";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -50,27 +51,30 @@ function SearchResultsPage() {
   }, [query, filterType]);
 
   return (
-    <div className="container mx-auto px-4 py-8 font-font1 capitalize">
-      <h2 className="text-3xl font-bold mb-10">
-        Search Results for "
-        <span className="text-customBlue font-font2">{query}</span>"
-      </h2>
-      {loading ? (
-        <p className="text-gray-500">Loading search results...</p>
-      ) : results.length === 0 ? (
-        <p className="text-gray-600">No results found.</p>
-      ) : (
-        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {results.map((book) => (
-            <BookCard
-              key={book._id}
-              book={book}
-              onViewDetails={() => console.log(book)}
-            />
-          ))}
-        </div>
-      )}
-    </div>
+    <>
+      <NavBar2 />
+      <div className="container mx-auto px-4 py-8 font-font1 capitalize">
+        <h2 className="text-3xl font-bold mb-10">
+          Search Results for "
+          <span className="text-customBlue font-font2"> {query} </span>"
+        </h2>
+        {loading ? (
+          <p className="text-gray-500">Loading search results...</p>
+        ) : results.length === 0 ? (
+          <p className="text-gray-600">No results found.</p>
+        ) : (
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {results.map((book) => (
+              <BookCard
+                key={book._id}
+                book={book}
+                onViewDetails={() => console.log(book)}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 

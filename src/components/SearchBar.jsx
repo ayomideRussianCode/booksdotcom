@@ -1,19 +1,13 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 function SearchBar({ onSearch }) {
   const [query, setQuery] = useState("");
   const [filterType, setFilterType] = useState("title");
-  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!query.trim()) return;
-    navigate(
-      `/searchresultspage?filterType=${filterType}&query=${encodeURIComponent(
-        query
-      )}`
-    );
+    onSearch(query, filterType);
   };
 
   return (

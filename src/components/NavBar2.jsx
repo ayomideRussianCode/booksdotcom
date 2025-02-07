@@ -3,7 +3,7 @@ import Logo from "../components/Logo";
 import SearchBar from "./SearchBar";
 import axios from "axios";
 
-function NavBar2() {
+function NavBar2({ onSearch }) {
   const [searchResults, setSearchResults] = useState([]);
   const handleSearch = async (query, filterType) => {
     if (!query) return;
@@ -54,7 +54,7 @@ function NavBar2() {
               type="text"
               placeholder="Search Books, Authors etc."
               className="w-96 border rounded-full px-4 py-2 focus:outline-none"
-              onSearch={handleSearch}
+              onSearch={onSearch}
             />
           </div>
           <div className="flex items-center space-x-4 sm:space-x-6">

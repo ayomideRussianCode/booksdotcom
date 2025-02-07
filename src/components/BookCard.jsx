@@ -3,7 +3,7 @@ import React from "react";
 const BookCard = ({ book, onViewDetails }) => {
   return (
     <div className="flex flex-col md:flex-row bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-      <div className="w-full md:w-1/3 h-48 bg-gray-200">
+      <div className="w-full md:w-1/2 lg:w-auto">
         {book.coverImage ? (
           <img
             src={book.coverImage[0]}
@@ -30,7 +30,7 @@ const BookCard = ({ book, onViewDetails }) => {
           onClick={() => onViewDetails(book)}
           className="mt-4 self-start bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
         >
-          View Details
+          <a href="/">View Details</a>
         </button>
       </div>
     </div>

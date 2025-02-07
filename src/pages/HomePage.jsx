@@ -8,7 +8,6 @@ import RecentlySold from "../components/home/RecentlySold";
 import NewArrivals from "../components/home/NewArrivals";
 import BestKidsBooks from "../components/home/BestKidsBooks";
 import FeaturedAuthors from "../components/home/FeaturedAuthors";
-import NewsLetter from "../components/home/NewsLetter";
 import Footer from "../components/Footer";
 
 const HomePage = () => {
@@ -23,7 +22,6 @@ const HomePage = () => {
       <NewArrivals />
       <BestKidsBooks />
       <FeaturedAuthors />
-      <NewsLetter />
       <Footer />
     </>
   );
