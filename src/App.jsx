@@ -25,6 +25,7 @@ import CategorySelector from "./pages/CategorySelector";
 import CreatorsProfile from "./pages/CreatorsProfile";
 import ResetPassword from "./pages/ResetPassword";
 import SearchResultsPage from "./pages/SearchResultsPage";
+import Checkout from "./pages/Checkout";
 
 const router = createBrowserRouter7(
   createRoutesFromElements7(
@@ -48,6 +49,7 @@ const router = createBrowserRouter7(
       <Route7 path="/creator" element={<CreatorsProfile />} />
       <Route7 path="/resetpassword" element={<ResetPassword />} />
       <Route7 path="/searchresultspage" element={<SearchResultsPage />} />
+      <Route7 path="/checkout" element={<Checkout/>}/>
     </Route7>
   )
 );

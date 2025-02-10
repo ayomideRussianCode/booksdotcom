@@ -22,12 +22,7 @@ function NavBar() {
           >
             Home
           </NavLink>
-          <NavLink
-            to="/blogs"
-            className="font-medium text-customBlack hover:underline decoration-customBlue decoration-2"
-          >
-            Blogs
-          </NavLink>
+
           <NavLink
             to="/about"
             className="font-medium text-customBlack hover:underline decoration-customBlue decoration-2"
@@ -75,9 +70,6 @@ function NavBar() {
       >
         <NavLink to="/home" onClick={toggleMenu}>
           Home
-        </NavLink>
-        <NavLink to="/blogs" onClick={toggleMenu}>
-          Blogs
         </NavLink>
         <NavLink to="/about" onClick={toggleMenu}>
           About Us

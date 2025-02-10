@@ -1,5 +1,4 @@
 import Footer from "../components/Footer";
-import NewsLetter from "../components/home/NewsLetter";
 import NavBar from "../components/NavBar";
 
 function AboutUs() {
@@ -66,7 +65,6 @@ function AboutUs() {
           </div>
         </div>
       </section>
-      <NewsLetter />
       <Footer />
     </>
   );

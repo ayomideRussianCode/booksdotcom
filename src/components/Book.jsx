@@ -1,8 +1,6 @@
-import React from "react";
-
-const BookCard = ({ book, addToCart }) => {
+function Book({ book }) {
   return (
-    <div className="flex flex-col md:flex-row pt-6 gap-6 capitalize font-font1">
+    <>
       <div className="w-full md:w-1/2 lg:w-auto">
         {book.coverImage ? (
           <img src={book.coverImage[0]} alt={book.title} className="max-w-sm" />
@@ -12,25 +10,27 @@ const BookCard = ({ book, addToCart }) => {
           </div>
         )}
       </div>
-      <div className="w-ful md:w-1/2 lg:w-96">
+      <div className="w-full md:w-1/2 lg:w-96">
+        <h3 className="text-2xl font-bold">{book.title}A Novel</h3>
+        <p className="text-gray-500">Softcopy</p>
         <div>
           <h3 className="text-xl font-semibold mb-2">{book.title}</h3>
           <p className="text-gray-700 mb-1">{book.description}</p>
-          <small className="text-gray-500 text-sm">ISBN: {book.ISBN}</small>
-          <p className="text-customBlue-full text-sm font-bold">
+          <p className="text-gray-500 text-sm">ISBN: {book.ISBN}</p>
+          <p className="text-gray-500 text-sm">
             Author:{" "}
             {Array.isArray(book.author) ? book.author.join(", ") : book.author}
           </p>
         </div>
-        <button
-          onClick={() => addToCart(book)}
-          className="mt-4 self-start bg-yellow-500 hover:bg-yellow-700 text-customBlack px-4 py-2 rounded-full"
-        >
-          <a href="/">Add to cart</a>
-        </button>
+        <small>
+          <a href="/featuredauthors" className="text-blue-500">
+            {book.author}
+          </a>{" "}
+          (Author, Narrator)
+        </small>
       </div>
-    </div>
+    </>
   );
-};
+}
 
-export default BookCard;
+export default Book;

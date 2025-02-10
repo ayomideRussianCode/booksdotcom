@@ -15,9 +15,10 @@ const BookSearch = () => {
         `https://booksdotcom.onrender.com/api/v1/products/search?${filterType}=${query}`
       );
       console.log("Full Response:", response);
-      setResults(response.data);
+      setResults(response.data.products || []);
     } catch (error) {
       console.error("Error fetching search results", error);
+      setResults([]);
     } finally {
       setLoading(false);
     }

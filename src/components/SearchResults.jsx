@@ -1,6 +1,8 @@
 import BookCard from "./BookCard";
 
 const SearchResults = ({ query, results, onViewDetails }) => {
+  console.log("Rendering SearchResults with:", results);
+
   return (
     <div className="mt-8">
       <h2 className="text-2xl font-bold mb-4">
