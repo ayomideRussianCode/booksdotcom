@@ -13,12 +13,16 @@ function PaymentDashboard() {
   const [error, setError] = useState("");
 
   const addToCart = (item) => {
-    setCartItems([...cartItems, item]);
+    setCartItems((prevCart) =>{
+      if(prevCart.somme((cartItem) => cartItem.id === item.id)) {
+        return prevCart;
+      }
+      return [...prevCart, item]
+  })
   };
   
 
   const handleSearch = async (searchQuery, filterType) => {
-    console.log("anything");
     setQuery(searchQuery);
     setLoading(true);
     setError("");
@@ -28,7 +32,6 @@ function PaymentDashboard() {
           searchQuery
         )}`
       );
-      console.log(response, "check");
 
       const fetchedProducts =
         response.data.products?.products || response.data.products || [];
@@ -43,7 +46,6 @@ function PaymentDashboard() {
     }
   };
   useEffect(() => {
-    console.log("Updated results:", results);
   }, [results]);
 
   return (

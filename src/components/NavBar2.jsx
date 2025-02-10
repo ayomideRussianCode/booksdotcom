@@ -2,9 +2,11 @@ import { useState } from "react";
 import Logo from "../components/Logo";
 import SearchBar from "./SearchBar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function NavBar2({ onSearch }) {
   const [searchResults, setSearchResults] = useState([]);
+  const navigate = useNavigate();
   const handleSearch = async (query, filterType) => {
     if (!query) return;
 
@@ -58,7 +60,7 @@ function NavBar2({ onSearch }) {
             />
           </div>
           <div className="flex items-center space-x-4 sm:space-x-6">
-            <div>
+            <div onClick={() => navigate("/checkout")} className="cursor-pointer">
               <img src="./cart.png" alt="Cart" className="h-6 w-6" />
             </div>
             <div>

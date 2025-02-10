@@ -1,142 +1,130 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import React, { useState, useEffect, useCallback } from 'react';
+import axios from 'axios';
+import Logo from '../Logo'
+import Title from '../Title';
+import Description from "../Description";
+import { useNavigate } from 'react-router-dom';
 
-const api = axios.create({
-  baseURL: "https://booksdotcom.onrender.com/api/v1",
-  timeout: 10000,
-});
-
-const CategoryButton = ({ name, href, isActive, onClick }) => (
-  <button
-    onClick={onClick}
-    className={`
-      bg-customWhite 
-      text-customBlack 
-      font-medium 
-      py-2 
-      px-6 
-      border-2 
-      border-customBlack 
-      rounded-full
-      transition-colors 
-      ${isActive ? "bg-customBlue" : "hover:bg-customBlue"}
-    `}
-  >
-    <Link href={href}>{name}</Link>
-  </button>
-);
-
-function Categories({
-  title = "Categories",
-  containerClassName = "",
-  onCategoryClick = () => {},
-  activeCategory = null,
-}) {
+function Categories  ()  {
   const [categories, setCategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  const api = axios.create({
+    baseURL: 'https://booksdotcom.onrender.com/api/v1',
+  });
+
+  api.interceptors.request.use((config) => {
+    const token = localStorage.getItem('bearerToken');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  });
+
+  const fetchCategories = useCallback(async () => {
+    try {
+      const response = await api.get('/category');
+      console.log("Fetched categories:", response.data); 
+      setCategories(response.data.categories || []);
+      setIsLoading(false);
+    } catch (err) {
+      console.error('Error fetching categories:', err);
+      setError(err.response?.data?.message || 'Failed to fetch categories');
+      setIsLoading(false);
+    }
+  }, [api]);
+  
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        setIsLoading(true);
-        const response = await api.get("/category/");
-
-        let processedData = response.data;
-
-        if (response.data && response.data.categories) {
-          processedData = response.data.categories;
-        }
-
-        if (!Array.isArray(processedData)) {
-          if (typeof processedData === "object") {
-            processedData = Object.values(processedData);
-          } else {
-            throw new Error("Invalid data format received from API");
-          }
-        }
-
-        const validCategories = processedData
-          .map((category) => ({
-            _id: category._id || category.id || String(Math.random()),
-            name: category.name || category.title || "Unnamed Category",
-            href: category.href || "#",
-          }))
-          .filter((category) => category.name);
-
-        setCategories(validCategories);
-        setError(null);
-      } catch (err) {
-        console.error("Error fetching categories:", err);
-        setError(
-          err.response?.data?.message ||
-            err.message ||
-            "Failed to fetch categories. Please try again later."
-        );
-        setCategories([]);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     fetchCategories();
-  }, []);
 
-  const LoadingSpinner = () => (
-    <div className="flex justify-center items-center py-8">
-      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-customBlack"></div>
-    </div>
+  }, [fetchCategories]); 
+   const toggleCategory = (categoryId) => {
+    setSelectedCategories(prev => {
+      if (prev.includes(categoryId)) {
+        return prev.filter(id => id !== categoryId);
+      } else {
+        return [...prev, categoryId];
+      }
+    });
+  };
+
+  const savePreferences = async () => {
+    try {
+      const token = localStorage.getItem('bearerToken');
+      if(token) {
+        navigate('/home');
+      }else{
+        setError("No authentication token found. Please log in.");
+          return;
+      }
+
+      const response = await api.post('/category', {
+        categories: selectedCategories
+      }, {headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
   );
+      
+      console.log('Preferences saved successfully', response.data);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to save preferences');
+    }
+  };
 
-  const ErrorMessage = ({ message }) => (
-    <div className="text-red-500 p-4 rounded-md bg-red-50 border border-red-200">
-      <p>{message}</p>
-    </div>
-  );
-
-  if (isLoading) {
-    return (
-      <section className="container mx-auto py-8 text-center">
-        <LoadingSpinner />
-      </section>
-    );
+  const skipSelection = () => {
+    console.log("User skipped selection");
+    navigate('/home');
   }
 
-  if (error) {
-    return (
-      <section className="container mx-auto py-8 text-center">
-        <ErrorMessage message={error} />
-      </section>
-    );
-  }
-
-  const categoriesToRender = Array.isArray(categories) ? categories : [];
+  if (isLoading) return <div className="text-center p-4">Loading categories...</div>;
+  if (error) return <div className="text-red-500 p-4">{error}</div>;
 
   return (
-    <section
-      id="categories"
-      className={`relative container pb-8 mx-auto flex flex-col ${containerClassName}`}
+   
+    <section className="p-6 max-w-4xl mx-auto">
+         <Logo src="/Logo.png" alt="BOOKSDOTCOM" />
+        <Title text="Indicate Your Books Categories"  className='font-font2 text-customBlack mb-2 text-3xl'/>
+        <Description text="Let us know your book categories as a member in our community" className='font-font1 mb-8 text-customAsh  text-xs ' />
+      <div className="flex flex-wrap gap-2 mb-12">
+      {Array.isArray(categories) && categories.length > 0 ? (
+  categories.map(category => (
+    <button
+      key={category._id}
+      onClick={() => toggleCategory(category._id)}
+      className={`px-6 py-2 rounded-full border transition-colors
+        ${selectedCategories.includes(category._id)
+          ? 'bg-blue-500 text-white border-customBlue hover:bg-customBlue'
+          : 'bg-white text-gray-700 border-customBlack hover:border-blue-500'
+        }`}
     >
-      <div className="flex flex-col font-font2 text-customBlack text-center">
-        <h1 className="text-5xl font-light font-font2 mb-6">{title}</h1>
+      {category.name}
+    </button>
+  ))
+) : (
+  <p>Loading categories...</p>
+)}
+
       </div>
-      <div className="container mx-auto flex">
-        <ul className="flex flex-wrap justify-center gap-4">
-          {categoriesToRender.map((category) => (
-            <li key={category._id}>
-              <CategoryButton
-                name={category.name}
-                href={category.href}
-                isActive={activeCategory === category._id}
-                onClick={() => onCategoryClick(category)}
-              />
-            </li>
-          ))}
-        </ul>
+      <div className="flex  justify-end gap-2">
+        <button onClick={skipSelection}
+        className='px-6 py-2 bg-customWhite border-2 border-customBlue text-customBlue rounded-full hover:bg-customBlue hover:text-customWhite'>
+          Skip
+        </button>
+        <button
+          onClick={savePreferences}
+          disabled={selectedCategories.length === 0}
+          className="px-6 py-2 rounded-full bg-blue-500  text-white hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed"
+        >
+          Submit 
+        </button>
       </div>
     </section>
   );
-}
+};
 
 export default Categories;
