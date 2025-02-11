@@ -26,7 +26,7 @@ const BookCard = ({ book, addToCart }) => {
           onClick={() => addToCart(book)}
           className="mt-4 self-start bg-yellow-500 hover:bg-yellow-700 text-customBlack px-4 py-2 rounded-full"
         >
-          <a href="/">Add to cart</a>
+          Add to cart
         </button>
       </div>
     </div>

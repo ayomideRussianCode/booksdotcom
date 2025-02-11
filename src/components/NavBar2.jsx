@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function NavBar2({ onSearch }) {
+function NavBar2({ onSearch, cartItemCount }) {
   const [searchResults, setSearchResults] = useState([]);
   const navigate = useNavigate();
   const handleSearch = async (query, filterType) => {
@@ -63,6 +63,7 @@ function NavBar2({ onSearch }) {
             <div onClick={() => navigate("/checkout")} className="cursor-pointer">
               <img src="./cart.png" alt="Cart" className="h-6 w-6" />
             </div>
+            Cart({cartItemCount});
             <div>
               <img
                 src="./notification.png"
