@@ -4,23 +4,28 @@ import NavBar2 from "../components/NavBar2";
 import SearchResults from "../components/SearchResults";
 import Popular from "../components/home/Popular";
 import RecentlySold from "../components/home/RecentlySold";
+import ProductList from "../components/ProductList";
+import Checkout from "../components/Checkout";
 
 function PaymentDashboard() {
-  const [cartItems, setCartItems] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+  const [cart, setCart] = useState([]);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const addToCart = (item) => {
-    setCartItems((prevCart) =>{
-      if(prevCart.somme((cartItem) => cartItem.id === item.id)) {
-        return prevCart;
+    console.log("Adding to cart:", item);
+    setCart((prevCart) => {
+      if (prevCart.some((cartItem) => cartItem._id === item._id)) {
+        console.log("Adding to cart:", item);
+        return prevCart; 
       }
-      return [...prevCart, item]
-  })
+      return [...prevCart, item];
+    });
   };
-  
 
   const handleSearch = async (searchQuery, filterType) => {
     setQuery(searchQuery);
@@ -37,21 +42,23 @@ function PaymentDashboard() {
         response.data.products?.products || response.data.products || [];
 
       setResults(fetchedProducts);
-
     } catch (error) {
       console.error("Error fetching books:", error);
       setResults([]);
+      setError("Failed to fetch books. Please try again later.");
     } finally {
       setLoading(false);
     }
   };
+
   useEffect(() => {
   }, [results]);
 
   return (
     <div>
       <NavBar2
-        cartItems={cartItems}
+        cartItems={cart} 
+        cartItemCount={cart.length}
         addToCart={addToCart}
         onSearch={handleSearch}
       />
@@ -86,11 +93,10 @@ function PaymentDashboard() {
           ) : error ? (
             <p className="text-red-500">{error}</p>
           ) : (
-            <SearchResults query={query} results={results} />
+            <SearchResults query={query} results={results} addToCart={addToCart} />
           )}
         </div>
       )}
-
       <div className="flex flex-col md:flex-row pt-6 gap-6">
         <div className="w-full md:w-1/2 lg:w-96 border-4 border-customColor1 p-6 rounded-xl">
           <div className="flex flex-col md:flex-row gap-2">
@@ -126,6 +132,7 @@ function PaymentDashboard() {
           </div>
         </div>
       </div>
+      <ProductList products={results} addToCart={addToCart} />
       <Popular />
       <RecentlySold />
     </div>

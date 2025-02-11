@@ -60,7 +60,7 @@ function NavBar2({ onSearch, cartItemCount }) {
             />
           </div>
           <div className="flex items-center space-x-4 sm:space-x-6">
-            <div onClick={() => navigate("/checkout")} className="cursor-pointer">
+            <div onClick={() => navigate("/")} className="cursor-pointer">
               <img src="./cart.png" alt="Cart" className="h-6 w-6" />
             </div>
             Cart({cartItemCount});

@@ -1,6 +1,8 @@
 import React from "react";
 
 const BookCard = ({ book, addToCart }) => {
+  console.log("BookCard received addToCart:", addToCart); 
+
   return (
     <div className="flex flex-col md:flex-row pt-6 gap-6 capitalize font-font1">
       <div className="w-full md:w-1/2 lg:w-auto">
@@ -12,12 +14,12 @@ const BookCard = ({ book, addToCart }) => {
           </div>
         )}
       </div>
-      <div className="w-ful md:w-1/2 lg:w-96">
+      <div className="w-full md:w-1/2 lg:w-96">
         <div>
           <h3 className="text-xl font-semibold mb-2">{book.title}</h3>
           <p className="text-gray-700 mb-1">{book.description}</p>
           <small className="text-gray-500 text-sm">ISBN: {book.ISBN}</small>
-          <p className="text-customBlue-full text-sm font-bold">
+          <p className="text-customBlue text-sm font-bold">
             Author:{" "}
             {Array.isArray(book.author) ? book.author.join(", ") : book.author}
           </p>
