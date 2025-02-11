@@ -1,8 +1,11 @@
 import React from "react";
+import { useCart } from "../context/CartContext";
+
 
 const BookCard = ({ book, addToCart }) => {
-  console.log("BookCard received addToCart:", addToCart); 
+  const { toggleCartItem } = useCart();
 
+  
   return (
     <div className="flex flex-col md:flex-row pt-6 gap-6 capitalize font-font1">
       <div className="w-full md:w-1/2 lg:w-auto">
@@ -25,7 +28,7 @@ const BookCard = ({ book, addToCart }) => {
           </p>
         </div>
         <button
-          onClick={() => addToCart(book)}
+          onClick={() => toggleCartItem(book)}
           className="mt-4 self-start bg-yellow-500 hover:bg-yellow-700 text-customBlack px-4 py-2 rounded-full"
         >
           Add to cart

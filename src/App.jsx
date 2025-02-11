@@ -25,6 +25,9 @@ import CategorySelector from "./pages/CategorySelector";
 import CreatorsProfile from "./pages/CreatorsProfile";
 import ResetPassword from "./pages/ResetPassword";
 import SearchResultsPage from "./pages/SearchResultsPage";
+import Checkout from "./pages/Checkout";
+import { CartProvider } from "./context/CartContext";
+import AuthorProfile from "./pages/AuthorProfile"
 
 const router = createBrowserRouter7(
   createRoutesFromElements7(
@@ -48,11 +51,17 @@ const router = createBrowserRouter7(
       <Route7 path="/creator" element={<CreatorsProfile />} />
       <Route7 path="/resetpassword" element={<ResetPassword />} />
       <Route7 path="/searchresultspage" element={<SearchResultsPage />} />
+      <Route7 path="/checkout" element={<Checkout/>}/>
+      <Route7 path="/author'sprofile" element={<AuthorProfile/>}/>
     </Route7>
   )
 );
 
 const App = () => {
-  return <RouterProvider7 router={router} />;
+  return (
+    <CartProvider>
+      <RouterProvider7 router={router} />;
+    </CartProvider>
+  )
 };
 export default App;

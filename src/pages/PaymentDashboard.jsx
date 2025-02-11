@@ -5,11 +5,8 @@ import SearchResults from "../components/SearchResults";
 import Popular from "../components/home/Popular";
 import RecentlySold from "../components/home/RecentlySold";
 import ProductList from "../components/ProductList";
-import Checkout from "../components/Checkout";
 
 function PaymentDashboard() {
-  const [products, setProducts] = useState([]);
-  const [allProducts, setAllProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
