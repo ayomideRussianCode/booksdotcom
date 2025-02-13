@@ -8,9 +8,11 @@ import { useCart } from "../context/CartContext";
 function NavBar2({ onSearch }) {
   const [searchResults, setSearchResults] = useState([]);
   const navigate = useNavigate();
-  const {cart} = useCart();
-  const cartItemCount = cart.length;
-    console.log("Cart Length from Context:", cartItemCount);
+  const {cartItems} = useCart();
+  const cartItemCount = cartItems.length;
+  
+   console.log("Cart Length from Context:", cartItemCount);
+    
   const handleSearch = async (query, filterType) => {
     if (!query) return;
 
