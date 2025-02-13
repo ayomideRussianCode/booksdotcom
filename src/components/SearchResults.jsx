@@ -1,6 +1,6 @@
 import BookCard from "./BookCard";
 
-const SearchResults = ({ query, results, onViewDetails }) => {
+const SearchResults = ({ query, results, addToCart }) => {
   console.log("Rendering SearchResults with:", results);
 
   return (
@@ -14,10 +14,10 @@ const SearchResults = ({ query, results, onViewDetails }) => {
         <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {results.map((book) => (
             <BookCard
-              key={book._id}
+              key={book._id  }
               book={book}
-              onViewDetails={onViewDetails}
-            />
+              className="block p-4 border-b hover:bg-gray-100"
+              />
           ))}
         </div>
       )}
