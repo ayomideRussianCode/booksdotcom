@@ -59,10 +59,10 @@ const CartSummary = ({ onClose }) => {
             </div>
           ))}
 
-          <div className="mt-4 font-bold">Total: ${totalPrice.toFixed(2)}</div>
+          <div className="mt-4 font-bold">Total: #{totalPrice.toFixed(2)}</div>
           <button
             onClick={() => navigate("/checkout")}
-            className="bg-yellow-500 hover:bg-yellow-600 w-full py-2 mt-3 rounded"
+            className="bg-customBlue  hover:bg-customBlue w-full py-2 mt-3 rounded-full"
           >
             Checkout
           </button>
