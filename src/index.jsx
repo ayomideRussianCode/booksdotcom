@@ -6,6 +6,11 @@ import App from "./App";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
 
+
+
+
+
+
 //architecture
 // client side rendered app;(cra);
 //database from  an external REST API;
