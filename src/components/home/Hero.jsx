@@ -14,16 +14,15 @@ function Hero() {
           <div className=" flex justify-center md:justify-start">
             <a
               className="p-2 px-16 pt-2 text-customBlue font-font1 bg-customWhite"
-              href="a"
+              href="/readersdashboard"
             >
-              <button className="text-customWhite bg-customBlue p-2 px-20 pt-2 rounded-full">Search</button>
+              <button className="text-customWhite bg-customBlue p-2 px-20 pt-2 rounded-full">Readers Dashboard</button>
             </a>
           </div>
         </div>
         <div>
           <img src="/Heroimage2.png" alt="HeroImage" />
         </div>
-        {/* achievements */}
       </div>
     </section>
   );

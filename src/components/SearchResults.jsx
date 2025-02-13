@@ -16,8 +16,8 @@ const SearchResults = ({ query, results, addToCart }) => {
             <BookCard
               key={book._id  }
               book={book}
-              addToCart={addToCart}
-            />
+              className="block p-4 border-b hover:bg-gray-100"
+              />
           ))}
         </div>
       )}

@@ -1,63 +1,26 @@
-import { useState } from "react";
-import { usePaystackPayment } from "react-paystack";
-import { useCart } from "../context/CartContext";
-import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Checkout = () => {
-  const { cart } = useCart();
-  const [email, setEmail] = useState("");
-  const publicKey = "paystack-public-key";
-  const totalPrice = cart.reduce((acc, item) => acc + item.price, 0);
+const Checkout = ({ cart }) => {
+  const [isRegistered, setIsRegistered] = useState(false);
+  const navigate = useNavigate();
 
-  const config = {
-    reference: new Date().getTime().toString(),
-    email: email,
-    price: totalPrice * 100,
-    publicKey: publicKey,
-    currency: "NGN",
-  };
+  const totalAmount = cart.reduce((sum, item) => sum + parseFloat(item.price.replace("$", "")), 0);
 
-  const onSuccess = async (response) => {
-    console.log("Payment Success:", response);
-
-    try {
-      await axios.post("http://localhost:4001/api/v1/pay/", {
-        email: email,
-        price: totalPrice,
-        cartItems: cart,
-        transactionRef: response.reference,
-      });
-
-      alert("Payment Successful!");
-    } catch (error) {
-      console.error("Error saving order:", error);
-      alert("Payment was successful, but order could not be saved.");
+  const handleCheckout = () => {
+    if (!isRegistered) {
+      alert("Please register before proceeding.");
+      return navigate("/register");
     }
+    window.location.href = "https://checkout.paystack.com/your-public-key"; 
   };
-
-  const onClose = () => {
-    alert("Payment cancelled.");
-  };
-
-  const initializePayment = usePaystackPayment(config);
 
   return (
-    <div className="p-6">
-      <h2 className="text-xl font-bold mb-4">Checkout</h2>
-      <p className="mb-2">Total: ₦{totalPrice}</p>
-
-      <input
-        type="email"
-        placeholder="Enter your email"
-        className=" border border-customBlue p-2 w-96 mb-4 outline-customBlue"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-
-      <button
-        onClick={() => initializePayment(onSuccess, onClose)}
-        className="bg-customBlue rounded-lg px-4 py-2 text-customWhite">
-        Pay with Paystack
+    <div className="max-w-lg mx-auto mt-10 p-6 border rounded-lg">
+      <h2 className="text-xl font-bold">Checkout</h2>
+      <p className="mt-2">Total: <span className="font-semibold">${totalAmount.toFixed(2)}</span></p>
+      <button onClick={handleCheckout} className="w-full bg-green-600 text-white py-2 mt-4 rounded-lg">
+        Pay 
       </button>
     </div>
   );

@@ -66,7 +66,7 @@ function NavBar2({ onSearch }) {
             />
           </div>
           <div className="flex items-center space-x-4 sm:space-x-6">
-            <div className="relative cursor-pointer" onClick={() => navigate("/checkout")}>
+            <div className="relative cursor-pointer" onClick={() => navigate("/cartsummary")}>
               <img src="./cart.png" alt="Cart" className="h-8 w-8" />
               {cartItemCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
