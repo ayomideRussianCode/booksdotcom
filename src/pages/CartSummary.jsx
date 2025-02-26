@@ -27,7 +27,7 @@ const CartSummary = ({ onClose }) => {
   }, 0);
 
   return (
-    <div className="fixed top-0 right-0 w-80 h-full bg-white shadow-lg p-4 overflow-y-auto">
+    <div className="fixed top-0 right-0 w-80 h-full bg-customWhite shadow-lg p-4 overflow-y-auto">
       <h2 className="text-lg font-semibold">Cart Summary</h2>
       <button onClick={onClose} className="absolute top-2 right-2">✖</button>
 
@@ -36,7 +36,7 @@ const CartSummary = ({ onClose }) => {
       ) : (
         <>
           {cartItems.map((book) => (
-            <div key={book.id} className="border-b py-2">
+            <div key={book._id} className="border-b py-2">
               <h4 className="font-medium">{book.title}</h4>
               <select
                 onChange={(e) =>
@@ -46,12 +46,12 @@ const CartSummary = ({ onClose }) => {
               >
                 {book.formats.map((format, index) => (
                   <option key={index} value={JSON.stringify(format)}>
-                    {format.type} - ${format.price.toFixed(2)}
+                    {format.type} - #{format.price.toFixed(2)}
                   </option>
                 ))}
               </select>
               <button
-                onClick={() => removeFromCart(book.id)}
+                onClick={() => removeFromCart(book._id)}
                 className="text-red-500 text-sm ml-2"
               >
                 Remove
@@ -59,10 +59,10 @@ const CartSummary = ({ onClose }) => {
             </div>
           ))}
 
-          <div className="mt-4 font-bold">Total: ${totalPrice.toFixed(2)}</div>
+          <div className="mt-4 font-bold">Total: #{totalPrice.toFixed(2)}</div>
           <button
             onClick={() => navigate("/checkout")}
-            className="bg-yellow-500 hover:bg-yellow-600 w-full py-2 mt-3 rounded"
+            className="bg-customBlue  hover:bg-customBlue w-full py-2 mt-3 rounded-full"
           >
             Checkout
           </button>

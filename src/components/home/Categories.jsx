@@ -17,17 +17,19 @@ function Categories  ()  {
   });
 
   api.interceptors.request.use((config) => {
-    const token = localStorage.getItem('bearerToken');
+    const token = localStorage.getItem('authToken');
+    console.log("Token before API request:", token);
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   });
-
   const fetchCategories = useCallback(async () => {
-    try {
+  try {
       const response = await api.get('/category');
       console.log("Fetched categories:", response.data); 
+      
       setCategories(response.data.categories || []);
       setIsLoading(false);
     } catch (err) {
@@ -35,51 +37,64 @@ function Categories  ()  {
       setError(err.response?.data?.message || 'Failed to fetch categories');
       setIsLoading(false);
     }
-  }, [api]);
+  }, []);
   
 
   useEffect(() => {
     fetchCategories();
+  }, [fetchCategories]);
 
-  }, [fetchCategories]); 
-   const toggleCategory = (categoryId) => {
-    setSelectedCategories(prev => {
-      if (prev.includes(categoryId)) {
-        return prev.filter(id => id !== categoryId);
-      } else {
-        return [...prev, categoryId];
-      }
-    });
-  };
+  const toggleCategory = useCallback((categoryId) => {
+    setSelectedCategories((prev) => 
+      prev.includes(categoryId) ? prev.filter((id) => id !== categoryId) : [...prev, categoryId]
+    );
+  }, []);
+  
 
+  
   const savePreferences = async () => {
-    try {
-      const token = localStorage.getItem('bearerToken');
-      if(token) {
-        navigate('/home');
-      }else{
-        setError("No authentication token found. Please log in.");
-          return;
-      }
 
-      const response = await api.post('/category', {
-        categories: selectedCategories
-      }, {headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-      
-      console.log('Preferences saved successfully', response.data);
+    try {
+      const token = localStorage.getItem("authToken");
+
+  
+      if (!token) {
+        console.error("No token found in localStorage");
+        setError("Authentication required. Please log in.");
+        navigate("/login");  
+        return;
+      }
+  
+      const headers = {
+        Authorization: `Bearer ${token}`, 
+        "Content-Type": "application/json",
+      };
+  
+      const response = await axios.post(
+        "https://booksdotcom.onrender.com/api/v1/auth/user/preference/recommend",
+        { preferences: selectedCategories },  
+        { headers }
+      );
+  
+      console.log("Preferences saved successfully:", response.data);
+  
+      localStorage.removeItem("authToken"); 
+  
+      navigate("/login");
+  
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to save preferences');
+      console.error("Error saving preferences:", err.response);
+      setError(err.response?.data?.message || "Failed to save preferences");
     }
   };
-
+  
+  
+      
+    
   const skipSelection = () => {
     console.log("User skipped selection");
-    navigate('/home');
-  }
+    localStorage.removeItem("authToken");
+    navigate("/login");  }
 
   if (isLoading) return <div className="text-center p-4">Loading categories...</div>;
   if (error) return <div className="text-red-500 p-4">{error}</div>;

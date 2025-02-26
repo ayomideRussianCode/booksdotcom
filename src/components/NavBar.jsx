@@ -8,13 +8,19 @@ function NavBar() {
     setIsMenuOpen((prev) => !prev);
   };
 
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
-    <nav className="relative container mx-auto p-6 font-font1">
+    <nav className="relative container mx-auto p-6 font-font1 bg-white shadow-md">
       <div className="flex items-center justify-between">
+        {/* Logo */}
         <div className="pt-2">
-          <img src="/Logo.png" alt="BOOKSDOTCOM" />
+          <img src="/Logo.png" alt="BOOKSDOTCOM" className="h-10" />
         </div>
 
+        {/* Desktop Menu */}
         <div className="hidden space-x-8 md:flex">
           <NavLink
             to="/home"
@@ -22,7 +28,6 @@ function NavBar() {
           >
             Home
           </NavLink>
-
           <NavLink
             to="/about"
             className="font-medium text-customBlack hover:underline decoration-customBlue decoration-2"
@@ -49,40 +54,85 @@ function NavBar() {
           </NavLink>
         </div>
 
+        {/* Hamburger Menu Button */}
         <button
-          id="menu-btn"
-          className={`block hamburger  lg:hidden md:hidden focus:outline-none ${
-            isMenuOpen ? "open" : ""
-          }`}
+          className="md:hidden focus:outline-none"
           onClick={toggleMenu}
         >
-          <span className="hamburger-top"></span>
-          <span className="hamburger-middle"></span>
-          <span className="hamburger-bottom"></span>
+          <span className="sr-only">Open Main Menu</span>
+          <div className="space-y-1">
+            <span
+              className={`block w-6 h-0.5 bg-customBlue transition-transform duration-300 ${
+                isMenuOpen ? "rotate-45 translate-y-1.5" : ""
+              }`}
+            ></span>
+            <span
+              className={`block w-6 h-0.5 bg-customBlue transition-opacity duration-300 ${
+                isMenuOpen ? "opacity-0" : "opacity-100"
+              }`}
+            ></span>
+            <span
+              className={`block w-6 h-0.5 bg-customBlue transition-transform duration-300 ${
+                isMenuOpen ? "-rotate-45 -translate-y-1.5" : ""
+              }`}
+            ></span>
+          </div>
         </button>
       </div>
 
+      {/* Mobile Menu */}
       <div
-        id="menu"
-        className={`absolute flex-col items-center ${
-          isMenuOpen ? "flex" : "hidden"
-        } self-end py-8 mt-10 space-y-6 font-bold bg-customWhite sm:self-center left-6 right-6 drop-shadow`}
+        className={`absolute top-full left-0 right-0 bg-white shadow-md rounded-b-lg py-4 transition-transform duration-300 ease-in-out ${
+          isMenuOpen ? "transform scale-y-100" : "transform scale-y-0"
+        } origin-top`}
       >
-        <NavLink to="/home" onClick={toggleMenu}>
-          Home
-        </NavLink>
-        <NavLink to="/about" onClick={toggleMenu}>
-          About Us
-        </NavLink>
-        <NavLink to="/contact" onClick={toggleMenu}>
-          Contact Us
-        </NavLink>
-        <NavLink to="/signup" onClick={toggleMenu}>
-          Sign Up
-        </NavLink>
-        <NavLink to="/login" onClick={toggleMenu}>
-          Log In
-        </NavLink>
+        <ul className="flex flex-col items-center space-y-4">
+          <li>
+            <NavLink
+              to="/home"
+              onClick={closeMenu}
+              className="font-medium text-customBlue hover:underline"
+            >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/about"
+              onClick={closeMenu}
+              className="font-medium text-customBlack hover:underline"
+            >
+              About Us
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/contact"
+              onClick={closeMenu}
+              className="font-medium text-customBlack hover:underline"
+            >
+              Contact Us
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/signup"
+              onClick={closeMenu}
+              className="font-medium py-2 px-6 border-2 text-customBlue rounded-full border-customBlue"
+            >
+              Sign Up
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/login"
+              onClick={closeMenu}
+              className="font-medium py-2 px-6 border-2 text-customWhite bg-customBlue rounded-full"
+            >
+              Log In
+            </NavLink>
+          </li>
+        </ul>
       </div>
     </nav>
   );

@@ -22,6 +22,7 @@ function SignUpVerification() {
     setError("");
     try {
       const token = localStorage.getItem("authToken");
+      console.log("Token retrieved:", token);
 
       if (!token) {
         setError(
@@ -52,7 +53,7 @@ function SignUpVerification() {
 
       if (response.status === 200) {
         alert("Verification successful! You can now pick a role.");
-        localStorage.removeItem("authToken");
+        localStorage.setItem("authToken", token);
         navigate("/roleselection");
       }
     } catch (err) {

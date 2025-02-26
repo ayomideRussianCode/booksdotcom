@@ -1,8 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
-function CodeField({ onVerify, onResend, disabled }) {
-  const [code, setCode] = useState(new Array(6).fill(""));
-  const inputRefs = useRef([...Array(6)].map(() => React.createRef()));
+function CodeField({ onVerify, onResend, disabled, length = 6 }) {
+  const [code, setCode] = useState(new Array(length).fill(""));
+  const inputRefs = useRef([...Array(length)].map(() => React.createRef()));
+
+  useEffect(() => {
+    inputRefs.current[0].current.focus();
+  }, []);
 
   const handleChange = (value, index) => {
     if (!/^\d*$/.test(value)) return;
@@ -11,7 +15,7 @@ function CodeField({ onVerify, onResend, disabled }) {
     newCode[index] = value;
     setCode(newCode);
 
-    if (value && index < 5) {
+    if (value && index < length - 1) {
       inputRefs.current[index + 1].current.focus();
     }
   };
@@ -27,7 +31,7 @@ function CodeField({ onVerify, onResend, disabled }) {
 
   const handleVerify = () => {
     const finalCode = code.join("");
-    if (finalCode.length === 6) {
+    if (finalCode.length === length) {
       onVerify?.(finalCode);
     }
   };
@@ -38,7 +42,7 @@ function CodeField({ onVerify, onResend, disabled }) {
         {code.map((digit, index) => (
           <input
             key={index}
-            id={inputRefs.current[index]}
+            ref={inputRefs.current[index]}
             type="text"
             maxLength={1}
             value={digit}
@@ -46,6 +50,7 @@ function CodeField({ onVerify, onResend, disabled }) {
             onChange={(e) => handleChange(e.target.value, index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
             className="w-12 h-12 border border-customBlue rounded-lg text-center text-lg focus:outline-none focus:ring-2 focus:ring-customBlue"
+            aria-label={`Digit ${index + 1}`}
           />
         ))}
       </div>
@@ -58,7 +63,7 @@ function CodeField({ onVerify, onResend, disabled }) {
       </p>
       <button
         onClick={handleVerify}
-        disabled={disabled || code.join("").length !== 6}
+        disabled={disabled || code.join("").length !== length}
         className="w-full bg-customBlue text-white py-3 rounded-lg font-semibold hover:bg-opacity-90 transition"
       >
         Verify
