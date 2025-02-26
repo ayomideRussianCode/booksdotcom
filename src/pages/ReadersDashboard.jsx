@@ -5,6 +5,7 @@ import NavBar2 from "../components/NavBar2";
 import SearchResults from "../components/SearchResults";
 import Popular from "../components/home/Popular";
 import RecentlySold from "../components/home/RecentlySold";
+import Footer from "../components/Footer";
 
 const CATEGORIES = [
   "Games & Activities",
@@ -122,6 +123,7 @@ function ReadersDashboard () {
       <div className="px-4 py-8">
         <Popular />
         <RecentlySold />
+        <Footer/>
       </div>
     </div>
   );

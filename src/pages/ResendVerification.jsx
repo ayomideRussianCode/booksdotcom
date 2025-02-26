@@ -21,11 +21,12 @@ function ResendVerification() {
     setSuccessMessage("");
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email) {
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail) {
       setError("Please enter your email address.");
       setLoading(false);
       return;
-    } else if (!emailRegex.test(email)) {
+    } else if (!emailRegex.test(trimmedEmail)) {
       setError("Please enter a valid email address.");
       setLoading(false);
       return;
@@ -77,7 +78,7 @@ function ResendVerification() {
           <Button
             text={loading ? "Resending..." : "Resend Code"}
             onClick={handleResend}
-            disabled={loading}
+            disabled={loading || successMessage}
           />
         </div>
       </div>

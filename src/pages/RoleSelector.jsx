@@ -15,9 +15,11 @@ function RoleSelection() {
     setLoading(true);
     setError("");
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("authToken");
+      console.log("Token retrieved:", token);
       if (!token) {
-        setError("Authentication failed. Please log in again.");
+        setError("Authentication failed.");
+        setLoading(false)
         return;
       }
 
@@ -26,9 +28,19 @@ function RoleSelection() {
         { role: selectedRole.toLowerCase() },
         { headers: { Authorization: `Bearer ${token}` } }
       );
+      console.log("Response:", response.data);
 
       if (response.status === 200) {
-        navigate(selectedRole === "User" ? "/categories" : "/creator");
+        console.log("Token from response:", response.data.token);
+        localStorage.setItem("authToken", response.data.token);
+        console.log("Token retrieved:", localStorage.getItem("authToken"));
+
+        const roleRoutes ={
+          User: "/categoriesselector",
+          Creator: "/author'sprofile",
+        };
+
+        navigate(roleRoutes[selectedRole]);
       }
     } catch (err) {
       console.error("Role assignment error:", err.response);
@@ -86,12 +98,7 @@ function RoleSelection() {
         </div>
 
         <div className="flex flex-row gap-4 pt-48 font-font1">
-          <button
-            onClick={() => navigate("/login")}
-            className="text-customBlue  rounded-full border-2 border-customBlue px-8 py-2"
-          >
-            Skip
-          </button>
+         
           <button
             onClick={handleRoleSelection}
             disabled={loading}

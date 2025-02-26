@@ -22,8 +22,17 @@ export function CartProvider({ children }) {
     });
   };
 
+  const updateCartItem = (bookId, format) => {
+    setCartItems((prev) => prev.map((item) => item._id===bookId ? {...item,selectedFormat: format } : item ))
+  }
+  
   const removeFromCart = (bookId) => {
-    setCartItems(prev => prev.filter(item => item._id !== bookId));
+    setCartItems((prev) => {
+      console.log("Cart before removal:", prev);
+      const newCart = prev.filter((item) => item._id !== bookId);
+    console.log("cart after removal:", newCart);
+    return newCart;
+  });
   };
 
   const toggleCartItem = (book) => {
@@ -40,6 +49,7 @@ export function CartProvider({ children }) {
       value={{
         cartItems,
         addToCart,
+        updateCartItem,
         removeFromCart,
         toggleCartItem
       }}

@@ -5,7 +5,7 @@ const Checkout = ({ cart }) => {
   const [isRegistered, setIsRegistered] = useState(false);
   const navigate = useNavigate();
 
-  const totalAmount = cart.reduce((sum, item) => sum + parseFloat(item.price.replace("$", "")), 0);
+  const totalAmount = cart.reduce((sum, item) => sum + parseFloat(item.price.replace("#", "")), 0);
 
   const handleCheckout = () => {
     if (!isRegistered) {
