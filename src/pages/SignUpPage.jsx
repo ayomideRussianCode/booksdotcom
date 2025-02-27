@@ -236,11 +236,13 @@ function SignUpPage() {
         password: formData.password
       };
 
+      const token = localStorage.getItem('authToken');
       const response = await axios.post(
         "https://booksdotcom.onrender.com/api/v1/auth/register",
         signupData,
         {
           headers: {
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json"
           }
         }

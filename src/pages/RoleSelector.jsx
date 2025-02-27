@@ -26,13 +26,20 @@ function RoleSelection() {
       const response = await axios.patch(
         "https://booksdotcom.onrender.com/api/v1/auth/assignrole",
         { role: selectedRole.toLowerCase() },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { 
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+
+         } }
+
       );
+      console.log("Response Headers:", response.headers);
       console.log("Response:", response.data);
 
       if (response.status === 200) {
+        console.log("Full Response:", response);
         console.log("Token from response:", response.data.token);
-        localStorage.setItem("authToken", response.data.token);
+        localStorage.setItem("authToken", token);
         console.log("Token retrieved:", localStorage.getItem("authToken"));
 
         const roleRoutes ={

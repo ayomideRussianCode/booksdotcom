@@ -29,15 +29,20 @@ function ForgotPassword() {
 
       const response = await axios.post(
         "https://booksdotcom.onrender.com/api/v1/auth/forget",
-        { email }
+        { email },
+       { headers: {
+          "Content-Type": "application/json",
+        },}
+        
+        
       );
 
       if (response.status === 200) {
         setSuccessMessage(
           "Reset link has been sent to your email. Please check your inbox."
         );
+        setEmail("");
         setTimeout(() => {
-          navigate("/resetpassword");
         }, 3000);
       }
     } catch (err) {
@@ -68,9 +73,9 @@ function ForgotPassword() {
           <Logo src="/Logo.png" alt="BOOKSDOTCOM" />
           <Title text="Forgot Password" />
 
-          {error && <p className="text-red-500 mb-4">{error}</p>}
+          {error && <p className="text-red-500 mb-4" aria-live="assertive">{error}</p>}
           {successMessage && (
-            <p className="text-green-500 mb-4">{successMessage}</p>
+            <p className="text-green-500 mb-4" aria-live="polite">{successMessage}</p>
           )}
 
           <FormField

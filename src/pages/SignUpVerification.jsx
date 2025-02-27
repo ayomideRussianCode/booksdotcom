@@ -45,8 +45,8 @@ function SignUpVerification() {
         formData,
         {
           headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/x-www-form-urlencoded",
           },
         }
       );
