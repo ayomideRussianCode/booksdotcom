@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import axios from 'axios';
 import Logo from '../Logo'
 import Title from '../Title';
@@ -12,9 +12,10 @@ function Categories  ()  {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const api = axios.create({
+  const api = useMemo(() => axios.create({
     baseURL: 'https://booksdotcom.onrender.com/api/v1',
-  });
+  }), []);
+  
 
   api.interceptors.request.use((config) => {
     const token = localStorage.getItem('authToken');
@@ -37,7 +38,7 @@ function Categories  ()  {
       setError(err.response?.data?.message || 'Failed to fetch categories');
       setIsLoading(false);
     }
-  }, []);
+  }, [api]);
   
 
   useEffect(() => {
@@ -70,8 +71,8 @@ function Categories  ()  {
         "Content-Type": "application/json",
       };
   
-      const response = await axios.post(
-        "https://booksdotcom.onrender.com/api/v1/auth/user/preference/recommend",
+      const response = await api.post(
+        "/auth/user/preference/recommend",
         { preferences: selectedCategories },  
         { headers }
       );
@@ -97,8 +98,15 @@ function Categories  ()  {
     navigate("/login");  }
 
   if (isLoading) return <div className="text-center p-4">Loading categories...</div>;
-  if (error) return <div className="text-red-500 p-4">{error}</div>;
-
+  if (error) {
+    return (
+      <div className="text-red-500 p-4">
+        {error}
+        <button onClick={fetchCategories} className="underline ml-2">Retry</button>
+      </div>
+    );
+  }
+  
   return (
    
     <section className="p-6 max-w-4xl mx-auto">

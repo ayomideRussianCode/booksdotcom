@@ -4,7 +4,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
  
 
-
 function ResetPassword() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -15,22 +14,26 @@ function ResetPassword() {
   const location = useLocation();
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("resetToken","token_value");
+   
     const urlToken = new URLSearchParams(location.search).get("token");
 
-    console.log("Stored Token:", storedToken);
    console.log("URL Token:", urlToken);
    console.log("Full URL:", window.location.href);
 
     
-    if (storedToken) {
-      setToken(storedToken);
-    } else if (urlToken) {
+    if (urlToken) {
       setToken(urlToken);
     } else {
-      setError("Invalid reset link. Please request a new one.");
+       const storedToken = localStorage.getItem("resetToken");
+       if (storedToken) {
+        setToken(storedToken);
+      } else {
+        setError("Invalid reset link. Please request a new one.");
+      }
     }
   }, [location]);
+
+   
 
   const handleReset = async () => {
     setLoading(true);
@@ -59,7 +62,7 @@ function ResetPassword() {
 
       const response = await axios.put(
         "https://booksdotcom.onrender.com/api/v1/auth/reset",
-        { password: newPassword, token },
+        { password: newPassword },
         {
           headers: {
             "Content-Type": "application/json",
