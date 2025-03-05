@@ -16,6 +16,8 @@ function RoleSelection() {
     setError("");
     try {
       const token = localStorage.getItem("authToken");
+      const decoded = JSON.parse(atob(token.split('.')[1]));
+      console.log(decoded);
       console.log("Token retrieved:", token);
       if (!token) {
         setError("Authentication failed.");
@@ -27,9 +29,8 @@ function RoleSelection() {
         "https://booksdotcom.onrender.com/api/v1/auth/assignrole",
         { role: selectedRole.toLowerCase() },
         { headers: { 
-          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
-
+          Authorization: `Bearer ${token}`,
          } }
 
       );
