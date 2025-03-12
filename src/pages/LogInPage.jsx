@@ -58,13 +58,12 @@ function LogInPage() {
         { email, password }
         
       );
-      console.log("Full Login Response:", response);
+      console.log("Full Login Response:", response.data);
 
-      if (response.status === 200) {
+      if (response.status === 200 && response.data?.token) {
         const { token, user } = response.data;
         console.log("Login Successful! Token:", response.data.token);
-
-        if (!token || !user) {
+        if ( !user) {
           throw new Error("Invalid login response from server.");
         }
 
@@ -80,7 +79,7 @@ function LogInPage() {
         navigate("/home");
       }
     } catch (err) {
-      console.error("Login error:", error.message);
+      console.error("Login error:", err.response ? err.response.data : err.message);
 
       setError(
         err.response?.data?.message ||
