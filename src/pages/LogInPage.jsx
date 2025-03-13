@@ -68,7 +68,6 @@ function LogInPage() {
         }
 
         localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(user));
 
         if (rememberMe) {
           localStorage.setItem("rememberedEmail", email);

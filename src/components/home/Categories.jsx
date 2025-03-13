@@ -19,7 +19,6 @@ function Categories() {
 
     instance.interceptors.request.use((config) => {
       const token = localStorage.getItem("authToken");
-      console.log("Token retrieved:", token);
 
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
@@ -35,7 +34,6 @@ function Categories() {
     setIsLoading(true);
     try {
       const response = await api.get("/category");
-      console.log("Fetched categories:", response.data);
       setCategories(response.data.categories || []);
     } catch (err) {
       setError(err.response?.data?.message || "Failed to fetch categories");
@@ -56,27 +54,28 @@ function Categories() {
     );
   }, []);
 
+ 
   const savePreferences = async () => {
     const token = localStorage.getItem("authToken");
-
-  if (!token) {
-    console.error("No token found!");
-    alert("You must be registered to save preferences.");
-    return;
-  }
+    if (!token) {
+      alert("You must be registered to save preferences.");
+      return;
+    }
+  
+    if (selectedCategories.length === 0) {
+      console.log("No categories selected.");
+      navigate("login")
+      return;
+    }
+    
     try {
-      if (selectedCategories.length > 0) {
-        const response = await api.post("/auth/user/preference/recommend", {
-          preferences: selectedCategories,
-        });
+      const response = await api.post("/auth/user/preference/recommend", {
+        preferences: selectedCategories
+      });
   
-        console.log("Preferences saved successfully:", response.data);
-      } else {
-        console.log("User skipped selection.");
-      }
-  
+      console.log("Preferences saved successfully:", response.data);
       localStorage.removeItem("authToken");
-      navigate("/login");
+            navigate("/login");
     } catch (err) {
       console.error("Failed to save preferences:", err.response?.data || err.message);
       alert("Error: " + (err.response?.data?.message || "Something went wrong! Please try again."));
@@ -95,7 +94,7 @@ function Categories() {
     return (
       <div className="text-red-500 p-4">
         {error}
-        <button onClick={savePreferences} className="underline ml-2">
+        <button onClick={fetchCategories} className="underline ml-2">
           Retry
         </button>
       </div>

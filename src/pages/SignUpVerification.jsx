@@ -25,6 +25,7 @@ function SignUpVerification() {
     }
   }, [navigate]);
 
+
   async function handleVerification(code) {
     if (!code) {
       setError("Please enter the verification code.");
@@ -49,6 +50,8 @@ function SignUpVerification() {
 
       console.log("Using Token:", currentToken);
 
+      console.log(`Bearer ${currentToken}`);
+      console.log("Bearer " + currentToken )
       const response = await axios.patch(
         "https://booksdotcom.onrender.com/api/v1/auth/activation",
         formData,
@@ -59,11 +62,12 @@ function SignUpVerification() {
           },
         }
       );
+      
 
-      console.log(
-        "Token at component mount:",
-      localStorage.getItem("authToken")
-      );
+      
+
+
+     
       console.log("Token before API call:", currentToken);
       console.log("Full API response:", response.data);
 

@@ -251,8 +251,7 @@ function SignUpPage() {
         console.log("Signup successful:", response.data);
         
         if (response.data.token) {
-          localStorage.setItem("authToken", JSON.stringify(response.data.token));
-          console.log("Token saved:", JSON.parse(localStorage.getItem("authToken")));
+          localStorage.setItem("authToken", response.data.token);
         }
         
         setFormData({

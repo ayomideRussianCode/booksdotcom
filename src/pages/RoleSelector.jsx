@@ -13,7 +13,6 @@ function RoleSelection() {
 
   useEffect(() => {
     const savedToken = localStorage.getItem("authToken");
-    console.log("Saved token in useEffect:", savedToken);
     if (!savedToken) {
       console.error("Token is undefined");
       setError("Auth token not found");
@@ -25,8 +24,7 @@ function RoleSelection() {
     setError("");
     try {
       const token = localStorage.getItem("authToken");
-      console.log("Token retrieved", token);
-      console.log(localStorage.getItem("authToken"));
+      
 
       if (!token) {
         console.error("Token is missing. User may need to log in again.");
@@ -48,15 +46,9 @@ function RoleSelection() {
 
       );
 
-      console.log("Auth Token in Local Storage:", localStorage.getItem("authToken"));
-      console.log("Response Headers:", response.headers);
-      console.log("Response:", response.data);
 
       if (response.status === 200) {
-        console.log("Full Response:", response);
-        console.log("Response Data:", response.data);
-        console.log("Token from response:", token);
-        localStorage.setItem("authToken", response.data);
+        // localStorage.setItem("authToken", response.data);
 
         const roleRoutes = {
           User: "/categoriesselector",
