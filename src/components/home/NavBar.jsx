@@ -77,7 +77,7 @@ function NavBar() {
               </span>
               <button
                 onClick={handleLogout}
-                className="font-medium py-2 px-6 border-2 text-customWhite bg-red-500 rounded-full"
+                className="font-medium py-2 px-6 border-2 text-customWhite capitalize bg-customBlue rounded-full"
               >
                 Log Out
               </button>
@@ -131,10 +131,10 @@ function NavBar() {
 
         {user ? (
           <>
-            <span className="text-customBlue">Hello, {user.name}!</span>
+            <span className="text-customBlue capitalize">Hello, {user.name}!</span>
             <button
               onClick={handleLogout}
-              className="py-2 px-6 bg-red-500 text-white rounded-full"
+              className="py-2 px-6 bg-customBlue text-white rounded-full"
             >
               Log Out
             </button>
