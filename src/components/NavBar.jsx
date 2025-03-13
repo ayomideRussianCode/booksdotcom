@@ -1,25 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(storedUser);
-    }
-  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    setUser(null);
-    // window.location.href = "/login"
   };
 
   return (
@@ -36,7 +22,12 @@ function NavBar() {
           >
             Home
           </NavLink>
-
+          <NavLink
+            to="/blogs"
+            className="font-medium text-customBlack hover:underline decoration-customBlue decoration-2"
+          >
+            Blogs
+          </NavLink>
           <NavLink
             to="/about"
             className="font-medium text-customBlack hover:underline decoration-customBlue decoration-2"
@@ -49,33 +40,18 @@ function NavBar() {
           >
             Contact Us
           </NavLink>
-          {user ? (
-            <div className="flex items-center space-x-4">
-              <span className="text-customBlack">Welcome, {user.name}!</span>
-              <NavLink
-                onClick={handleLogout}
-                className="font-medium py-2 px-6 border-2 rounded-full text-customWhite bg-customBlue"
-                to="/login"
-              >
-                Log out
-              </NavLink>
-            </div>
-          ) : (
-            <>
-              <NavLink
-                to="/signup"
-                className="font-medium py-2 px-6 border-2 text-customBlue hover:text-white"
-              >
-                Sign up
-              </NavLink>
-              <NavLink
-                to="/login"
-                className="font-medium py-2 px-6 border-2 text-customWhite bg-customBlue rounded-full"
-              >
-                Log in
-              </NavLink>
-            </>
-          )}
+          <NavLink
+            to="/signup"
+            className="hidden font-medium py-2 px-6 border-2 text-customBlue rounded-full border-customBlue hover:decoration-customBlue md:block"
+          >
+            Sign Up
+          </NavLink>
+          <NavLink
+            to="/login"
+            className="hidden font-medium py-2 px-6 border-2 text-customWhite bg-customBlue rounded-full md:block"
+          >
+            Log In
+          </NavLink>
         </div>
 
         <button
@@ -91,33 +67,31 @@ function NavBar() {
         </button>
       </div>
 
-      {isMenuOpen && (
-        <div className="absolute top-16 left-0 w-full bg-customWhite shadow-lg p-6 flex flex-col space-y-4">
-          <NavLink to="/home" onClick={toggleMenu}>
-            Home
-          </NavLink>
-          <NavLink to="/about" onClick={toggleMenu}>
-            About Us
-          </NavLink>
-          <NavLink to="/contact" onClick={toggleMenu}>
-            Contact Us
-          </NavLink>
-          {!user ? (
-            <>
-              <NavLink to="/signup" onClick={toggleMenu}>
-                Sign up
-              </NavLink>
-              <NavLink to="/login" onClick={toggleMenu}>
-                Log In
-              </NavLink>
-            </>
-          ) : (
-            <NavLink onClick={handleLogout} className="text-red-500">
-              Log out
-            </NavLink>
-          )}
+      <div
+        id="menu"
+        className={`absolute flex-col items-center ${
+          isMenuOpen ? "flex" : "hidden"
+        } self-end py-8 mt-10 space-y-6 font-bold bg-customWhite sm:self-center left-6 right-6 drop-shadow`}
+      >
+        <NavLink to="/home" onClick={toggleMenu}>
+          Home
+        </NavLink>
+        <NavLink to="/blogs" onClick={toggleMenu}>
+          Blogs
+        </NavLink>
+        <NavLink to="/about" onClick={toggleMenu}>
+          About Us
+        </NavLink>
+        <NavLink to="/contact" onClick={toggleMenu}>
+          Contact Us
+        </NavLink>
+        <NavLink to="/signup" onClick={toggleMenu}>
+          Sign Up
+        </NavLink>
+        <NavLink to="/login" onClick={toggleMenu}>
+          Log In
+        </NavLink>
       </div>
-    )}
     </nav>
   );
 }
