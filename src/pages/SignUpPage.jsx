@@ -236,48 +236,56 @@ function SignUpPage() {
         password: formData.password
       };
 
-      const token = localStorage.getItem('authToken');
       const response = await axios.post(
         "https://booksdotcom.onrender.com/api/v1/auth/register",
         signupData,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json"
-          }
+          },
+          timeout:50000
         }
       );
-
-      if (response.data.token) {
-        console.log("Token received:", response.data.token);
-        localStorage.setItem("authToken", response.data.token);
-      }  else {
-        console.warn("No token received from server");
+      
+      if (response.status === 201 || response.status === 200) {
+        console.log("Signup successful:", response.data);
+        
+        if (response.data.token) {
+          localStorage.setItem("authToken", response.data.token);
+        }
+        
+        setFormData({
+          name: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+        });
+      
+        navigate("/verify");
+      } else {
+        console.warn("Unexpected response format:", response.data);
       }
-
-      setFormData({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
-
-      navigate("/verify");
+      
     } catch (error) {
       console.error("Signup error:", error);
-      if (error.response?.data?.errors) {
-        const serverErrors = {};
-        error.response.data.errors.forEach(err => {
-          serverErrors[err.path] = err.msg;
-        });
-        setErrors(serverErrors);
-      } else if (error.response?.data?.message) {
-        alert(error.response.data.message);
+      if (error.response) {
+        if (error.response.data?.errors) {
+          const serverErrors = {};
+          error.response.data.errors.forEach(err => {
+            serverErrors[err.path] = err.msg;
+          });
+          setErrors(serverErrors);
+        } else if (error.response.data?.message) {
+          alert(error.response.data.message);
+        } else {
+          alert("An unexpected server error occurred. Please try again.");
+        }
       } else if (error.request) {
-        alert("No response from server. Please try again.");
+        alert("No response from server. Please check your network and try again.");
       } else {
-        alert("An unexpected error occurred. Please try again.");
+        alert("An error occurred while sending the request.");
       }
+      
     } finally {
       setLoading(false);
     }

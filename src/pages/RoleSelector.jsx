@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Logo from "../components/Logo";
@@ -11,38 +11,46 @@ function RoleSelection() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const savedToken = localStorage.getItem("authToken");
+    if (!savedToken) {
+      console.error("Token is undefined");
+      setError("Auth token not found");
+    }
+  }, []);
+
   const handleRoleSelection = async () => {
     setLoading(true);
     setError("");
     try {
       const token = localStorage.getItem("authToken");
-      console.log("Token retrieved:", token);
+      
+
       if (!token) {
+        console.error("Token is missing. User may need to log in again.");
         setError("Authentication failed.");
-        setLoading(false)
+        setLoading(false);
         return;
       }
 
       const response = await axios.patch(
+        
         "https://booksdotcom.onrender.com/api/v1/auth/assignrole",
         { role: selectedRole.toLowerCase() },
-        { headers: { 
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-
-         } }
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
 
       );
-      console.log("Response Headers:", response.headers);
-      console.log("Response:", response.data);
+
 
       if (response.status === 200) {
-        console.log("Full Response:", response);
-        console.log("Token from response:", response.data.token);
-        localStorage.setItem("authToken", token);
-        console.log("Token retrieved:", localStorage.getItem("authToken"));
+        // localStorage.setItem("authToken", response.data);
 
-        const roleRoutes ={
+        const roleRoutes = {
           User: "/categoriesselector",
           Creator: "/author'sprofile",
         };
@@ -105,7 +113,6 @@ function RoleSelection() {
         </div>
 
         <div className="flex flex-row gap-4 pt-48 font-font1">
-         
           <button
             onClick={handleRoleSelection}
             disabled={loading}

@@ -32,6 +32,7 @@ function ForgotPassword() {
         { email },
        { headers: {
           "Content-Type": "application/json",
+          
         },}
         
         

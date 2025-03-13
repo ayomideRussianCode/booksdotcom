@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LayOutWrapper from "../components/LayOutWrapper";
 import Illustration from "../components/Illustration";
@@ -12,6 +12,20 @@ function SignUpVerification() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const token = localStorage.getItem("authToken");
+
+  useEffect(() => {
+    const savedToken = localStorage.getItem("authToken");
+    console.log("Saved token in useEffect:", savedToken);
+    if (!savedToken) {
+      setError(
+        "Your session has expired. Please request a new verification code."
+      );
+      setTimeout(() => navigate("/login"), 3000);
+    }
+  }, [navigate]);
+
+
   async function handleVerification(code) {
     if (!code) {
       setError("Please enter the verification code.");
@@ -20,47 +34,73 @@ function SignUpVerification() {
 
     setLoading(true);
     setError("");
+
+    const currentToken = localStorage.getItem("authToken");
+    if (!currentToken) {
+      setError(
+        "Your session has expired. Please request a new  verification code."
+      );
+      setLoading(false);
+      return;
+    }
+
     try {
-      const token = localStorage.getItem("authToken");
-      console.log("Token retrieved:", token);
-
-      if (!token) {
-        setError(
-          "Your session has expired. Please request a new verification code."
-        );
-        setLoading(false);
-        return;
-      }
-
       const formData = new URLSearchParams();
       formData.append("otp", code);
 
-      console.log("Sending Request with:");
-      console.log("Token:", token);
-      console.log("OTP:", code);
-      console.log("Using Token:", token);
+      console.log("Using Token:", currentToken);
 
+      console.log(`Bearer ${currentToken}`);
+      console.log("Bearer " + currentToken )
       const response = await axios.patch(
         "https://booksdotcom.onrender.com/api/v1/auth/activation",
         formData,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${currentToken}`,
             "Content-Type": "application/x-www-form-urlencoded",
           },
         }
       );
+      
+
+      
+
+
+     
+      console.log("Token before API call:", currentToken);
+      console.log("Full API response:", response.data);
+
+      const newToken = response.data?.currentToken || currentToken;
+      if (newToken) {
+        localStorage.setItem("authToken", newToken);
+        console.log(
+          "Token stored after verification:",
+          localStorage.getItem("authToken")
+        );
+      }
 
       if (response.status === 200) {
+        if (newToken) {
+          localStorage.setItem("authToken", newToken);
+          console.log("Token stored after verification:", newToken);
+        }
         alert("Verification successful! You can now pick a role.");
-        localStorage.setItem("authToken", token);
         navigate("/roleselection");
       }
+      
     } catch (err) {
-      console.error("Error details:", err.response);
-      setError(
-        err.response?.data?.message || "An error occurred during verification."
-      );
+      console.error("Error details:", err);
+      if (!err.response) {
+        setError("Network error. Please check your connection and try again.");
+      } else if (err.response.status === 400) {
+        setError("Invalid code. Please try again.");
+      } else {
+        setError(
+          err.response?.data?.message ||
+            "An error occurred during verification."
+        );
+      }
     } finally {
       setLoading(false);
     }
@@ -77,7 +117,7 @@ function SignUpVerification() {
           <CodeField
             onVerify={handleVerification}
             onResend={() => navigate("/resendverification")}
-            disabled={loading}
+            disabled={loading || !token}
           />
         </div>
       </div>

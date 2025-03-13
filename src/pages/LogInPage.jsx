@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LayOutWrapper from "../components/LayOutWrapper";
 import Illustration from "../components/Illustration";
@@ -20,37 +20,69 @@ function LogInPage() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const savedEmail = localStorage.getItem("rememberedEmail");
+    if (savedEmail) {
+      setEmail(savedEmail);
+      setRememberMe(true);
+    }
+  }, []);
+
+  const validateInputs = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if (!email || !password) {
+      setError("Both email and password are required.");
+      return false;
+    }
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email.");
+      return false;
+    }
+    if (password.length < 6) {
+      setError("Password should be at least 6 characters.");
+      return false;
+    }
+    return true;
+  };
+
   const handleLogin = async () => {
+    if (!validateInputs()) return; 
+
     setLoading(true);
     setError("");
 
     try {
-      if (!email || !password) {
-        setError("Both email and password are required.");
-        setLoading(false);
-        return;
-      }
-
       const response = await axios.post(
         "https://booksdotcom.onrender.com/api/v1/auth/login",
         { email, password }
+        
       );
+      console.log("Full Login Response:", response.data);
 
-      if (response.status === 200) {
+      if (response.status === 200 && response.data?.token) {
         const { token, user } = response.data;
+        console.log("Login Successful! Token:", response.data.token);
+        if ( !user) {
+          throw new Error("Invalid login response from server.");
+        }
+
         localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(user));
+
         if (rememberMe) {
           localStorage.setItem("rememberedEmail", email);
         } else {
           localStorage.removeItem("rememberedEmail");
         }
+
         navigate("/home");
       }
     } catch (err) {
-      console.error("Login error:", err.response);
+      console.error("Login error:", err.response ? err.response.data : err.message);
+
       setError(
         err.response?.data?.message ||
+          err.message ||
           "An error occurred while logging in. Please try again."
       );
     } finally {
@@ -75,6 +107,7 @@ function LogInPage() {
             placeholder="Enter Email Address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            aria-label="Enter your email address"
           />
           <FormField
             label="Password"
@@ -82,6 +115,7 @@ function LogInPage() {
             placeholder="Enter Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            aria-label="Enter your password"
           />
 
           <div className="flex items-center justify-between mb-4 px-1">
@@ -92,6 +126,7 @@ function LogInPage() {
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(e.target.checked)}
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                aria-label="Remember my email"
               />
               <label htmlFor="remember-me" className="text-sm text-gray-600">
                 Remember me
@@ -100,6 +135,7 @@ function LogInPage() {
             <button
               onClick={() => navigate("/forgotpassword")}
               className="text-sm text-blue-600 hover:text-blue-500"
+              aria-label="Forgot password"
             >
               Forgot Password?
             </button>
@@ -109,6 +145,7 @@ function LogInPage() {
             text={loading ? "Logging in..." : "Log In"}
             onClick={handleLogin}
             disabled={loading}
+            aria-label="Login button"
           />
 
           <RedirectMessage
