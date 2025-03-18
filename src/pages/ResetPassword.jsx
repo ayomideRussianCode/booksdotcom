@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
- 
 
 function ResetPassword() {
   const [newPassword, setNewPassword] = useState("");
@@ -11,31 +10,23 @@ function ResetPassword() {
   const [error, setError] = useState("");
   const [token, setToken] = useState("");
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
-   
-    const urlToken = new URLSearchParams(location.search).get("token");
-
-   console.log("URL Token:", urlToken);
-   console.log("Full URL:", window.location.href);
-
-    
-    if (urlToken) {
-      setToken(urlToken);
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      setToken(token);
     } else {
-       const storedToken = localStorage.getItem("resetToken");
-       if (storedToken) {
-        setToken(storedToken);
-      } else {
-        setError("Invalid reset link. Please request a new one.");
-      }
+      setError("Invalid reset link. Please request a new one.");
     }
-  }, [location]);
-
-   
+  }, []);
 
   const handleReset = async () => {
+
+    console.log("Reset button clicked");
+    console.log("Current token:", token);
+    console.log("New password:", newPassword);
+    console.log("Confirm password:", confirmPassword);
+    
     setLoading(true);
     setError("");
 
@@ -58,9 +49,9 @@ function ResetPassword() {
     }
 
     try {
-      console.log("Sending token:", token);
+      console.log("Using token from localStorage:", token);
 
-      const response = await axios.put(
+      await axios.put(
         "https://booksdotcom.onrender.com/api/v1/auth/reset",
         { password: newPassword },
         {
@@ -72,6 +63,7 @@ function ResetPassword() {
       );
 
       toast.success("Password has been reset successfully!");
+      localStorage.removeItem("authToken"); 
       navigate("/login");
     } catch (err) {
       console.error("Error resetting password:", err);
@@ -108,6 +100,7 @@ function ResetPassword() {
         placeholder="Enter new password"
         value={newPassword}
         onChange={(e) => setNewPassword(e.target.value)}
+        disabled={loading}
       />
 
       <input
@@ -115,9 +108,12 @@ function ResetPassword() {
         placeholder="Confirm new password"
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
+        disabled={loading}
       />
 
-      <button onClick={handleReset} disabled={loading}>
+      <button  onClick={(e) => {
+    console.log("Button clicked via direct handler");
+    handleReset();}} disabled={loading} className=" px-4 py-2 rounded-full bg-customBlue">
         {loading ? "Resetting..." : "Reset Password"}
       </button>
     </div>
