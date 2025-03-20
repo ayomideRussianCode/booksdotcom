@@ -1,7 +1,7 @@
 import React from 'react';
 import { ChevronDown, ShoppingCart, Tag, LogOut, User, BookOpen } from 'lucide-react';
 import Logo from '../components/Logo';
-import NavBar2 from '../components/NavBar2';
+// import NavBar2 from '../components/NavBar2';
 
 const Sidebar = () => (
   <div className="w-64 bg-blue-600 h-screen p-4 text-white text-xs font-font1">

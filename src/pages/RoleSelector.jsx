@@ -33,6 +33,9 @@ function RoleSelection() {
         return;
       }
 
+      localStorage.setItem("userRole", selectedRole.toLowerCase());
+
+
       const response = await axios.patch(
         
         "https://booksdotcom.onrender.com/api/v1/auth/assignrole",
@@ -46,16 +49,25 @@ function RoleSelection() {
 
       );
 
-
       if (response.status === 200) {
         // localStorage.setItem("authToken", response.data);
 
-        const roleRoutes = {
-          User: "/categoriesselector",
-          Creator: "/author'sprofile",
-        };
+        if (response.data.user) {
+          localStorage.setItem("userData", JSON.stringify(response.data.user));
+        }
 
-        navigate(roleRoutes[selectedRole]);
+        if (selectedRole === "User") {
+          navigate("/categoriesselector");
+        } else if (selectedRole === "Creator") {
+          navigate("/author'sprofile");
+        }
+
+        // const roleRoutes = {
+        //   User: "/categoriesselector",
+        //   Creator: "/author'sprofile",
+        // };
+
+        // navigate(roleRoutes[selectedRole]);
       }
     } catch (err) {
       console.error("Role assignment error:", err.response);
