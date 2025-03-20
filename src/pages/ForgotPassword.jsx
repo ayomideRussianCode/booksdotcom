@@ -42,9 +42,18 @@ function ForgotPassword() {
         setSuccessMessage(
           "Reset link has been sent to your email. Please check your inbox."
         );
-        setEmail("");
         setTimeout(() => {
-        }, 3000);
+        }, 2000);
+
+        if (response.data.token) {
+          localStorage.setItem("authToken", response.data.token);
+        }
+
+        setEmail("");
+        navigate("/resetpassword");
+        
+      } else {
+        setError("An error occurred. Please try again later.");
       }
     } catch (err) {
       if (err.response) {

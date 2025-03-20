@@ -61,13 +61,10 @@ function LogInPage() {
       console.log("Full Login Response:", response.data);
 
       if (response.status === 200 && response.data?.token) {
-        const { token, user } = response.data;
+        const { token } = response.data;
         console.log("Login Successful! Token:", response.data.token);
-        if ( !user) {
-          throw new Error("Invalid login response from server.");
-        }
 
-        localStorage.setItem("token", token);
+        localStorage.setItem("authToken", token);
 
         if (rememberMe) {
           localStorage.setItem("rememberedEmail", email);

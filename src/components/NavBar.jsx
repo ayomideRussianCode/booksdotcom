@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { NavLink } from "react-router-dom";
 
 function NavBar() {
@@ -6,20 +7,40 @@ function NavBar() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(storedUser);
-    }
+    const fetchUser = async () => {
+      const token = localStorage.getItem("authToken");
+
+      if (!token) return;
+
+      try {
+        const response = await axios.get(
+          "https://booksdotcom.onrender.com/api/v1/auth/user",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (response.status === 200) {
+          setUser(response.data.user);
+        } else {
+          console.error("Failed to fetch user data");
+        }
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    };
+    fetchUser();
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setUser(null);
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    setUser(null);
-    // window.location.href = "/login"
   };
 
   return (
@@ -36,7 +57,6 @@ function NavBar() {
           >
             Home
           </NavLink>
-
           <NavLink
             to="/about"
             className="font-medium text-customBlack hover:underline decoration-customBlue decoration-2"
@@ -49,30 +69,32 @@ function NavBar() {
           >
             Contact Us
           </NavLink>
+
           {user ? (
-            <div className="flex items-center space-x-4">
-              <span className="text-customBlack">Welcome, {user.name}!</span>
-              <NavLink
+            <>
+              <span className="font-medium text-customBlue">
+                Hello, {user.name}!
+              </span>
+              <button
                 onClick={handleLogout}
-                className="font-medium py-2 px-6 border-2 rounded-full text-customWhite bg-customBlue"
-                to="/login"
+                className="font-medium py-2 px-6 border-2 text-customWhite capitalize bg-customBlue rounded-full"
               >
-                Log out
-              </NavLink>
-            </div>
+                Log Out
+              </button>
+            </>
           ) : (
             <>
               <NavLink
                 to="/signup"
-                className="font-medium py-2 px-6 border-2 text-customBlue hover:text-white"
+                className="hidden font-medium py-2 px-6 border-2 text-customBlue rounded-full border-customBlue hover:decoration-customBlue md:block"
               >
-                Sign up
+                Sign Up
               </NavLink>
               <NavLink
                 to="/login"
-                className="font-medium py-2 px-6 border-2 text-customWhite bg-customBlue rounded-full"
+                className="hidden font-medium py-2 px-6 border-2 text-customWhite bg-customBlue rounded-full md:block"
               >
-                Log in
+                Log In
               </NavLink>
             </>
           )}
@@ -91,33 +113,43 @@ function NavBar() {
         </button>
       </div>
 
-      {isMenuOpen && (
-        <div className="absolute top-16 left-0 w-full bg-customWhite shadow-lg p-6 flex flex-col space-y-4">
-          <NavLink to="/home" onClick={toggleMenu}>
-            Home
-          </NavLink>
-          <NavLink to="/about" onClick={toggleMenu}>
-            About Us
-          </NavLink>
-          <NavLink to="/contact" onClick={toggleMenu}>
-            Contact Us
-          </NavLink>
-          {!user ? (
-            <>
-              <NavLink to="/signup" onClick={toggleMenu}>
-                Sign up
-              </NavLink>
-              <NavLink to="/login" onClick={toggleMenu}>
-                Log In
-              </NavLink>
-            </>
-          ) : (
-            <NavLink onClick={handleLogout} className="text-red-500">
-              Log out
+      <div
+        id="menu"
+        className={`absolute flex-col items-center ${
+          isMenuOpen ? "flex" : "hidden"
+        } self-end py-8 mt-10 space-y-6 font-bold bg-customWhite sm:self-center left-6 right-6 drop-shadow`}
+      >
+        <NavLink to="/home" onClick={toggleMenu}>
+          Home
+        </NavLink>
+        <NavLink to="/about" onClick={toggleMenu}>
+          About Us
+        </NavLink>
+        <NavLink to="/contact" onClick={toggleMenu}>
+          Contact Us
+        </NavLink>
+
+        {user ? (
+          <>
+            <span className="text-customBlue capitalize">Hello, {user.name}!</span>
+            <button
+              onClick={handleLogout}
+              className="py-2 px-6 bg-customBlue text-white rounded-full"
+            >
+              Log Out
+            </button>
+          </>
+        ) : (
+          <>
+            <NavLink to="/signup" onClick={toggleMenu}>
+              Sign Up
             </NavLink>
-          )}
+            <NavLink to="/login" onClick={toggleMenu}>
+              Log In
+            </NavLink>
+          </>
+        )}
       </div>
-    )}
     </nav>
   );
 }

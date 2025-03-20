@@ -40,11 +40,6 @@ function Footer() {
               </a>
             </li>
             <li>
-              <a href="/Blogs" className="hover:text-customBlue">
-                Blogs
-              </a>
-            </li>
-            <li>
               <a href="/home" className="hover:text-customBlue">
                 Authors
               </a>
