@@ -11,7 +11,7 @@ function Button({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`w-full bg-customBlue py-2 rounded-full ${className}`}
+      className={`w-full bg-customBlue py-3 rounded-full ${className}`}
     >
       <a className="text-customWhite" href={href}>
         {text}
